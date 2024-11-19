@@ -80,3 +80,5 @@
     <script src="../javascript/verify_otp.js"></script>
 </body>
 </html>
+
+<!-- http://localhost/Database-Access-Control/views/login.php -->
