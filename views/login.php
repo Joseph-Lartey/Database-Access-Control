@@ -75,8 +75,8 @@
         </div>
     </div>
     
-    <script src="../js/signup.js"></script>
-    <script src="../js/login.js"></script>
-    <script src="../js/verify_otp.js"></script>
+    <script src="../javascript/signup.js"></script>
+    <script src="../javascript/login.js"></script>
+    <script src="../javascript/verify_otp.js"></script>
 </body>
 </html>
