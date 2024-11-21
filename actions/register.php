@@ -1,5 +1,4 @@
 <?php
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -14,7 +13,7 @@ use PHPMailer\PHPMailer\SMTP;
 
 require '../vendor/autoload.php';
 
-if (isset($_GET['msg']) == "registering") {
+if (isset($_GET['msg']) && $_GET['msg'] == "registering") {
 
     $firstName = $_SESSION['firstname'];
     $lastName = $_SESSION['lastname'];
@@ -22,17 +21,27 @@ if (isset($_GET['msg']) == "registering") {
     $role = $_SESSION['role'];
     $hashedPassword = $_SESSION['hashedPassword'];
 
-    // Prepare SQL statement for insertion
-    $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, password, role) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $firstName, $lastName, $email, $hashedPassword, $role);
-    $result = $stmt->execute();
+    try {
+        // Prepare SQL statement for insertion
+        $stmt = $pdo->prepare("INSERT INTO users (first_name, last_name, email, password, role) VALUES (:firstName, :lastName, :email, :password, :role)");
+        $stmt->bindParam(':firstName', $firstName);
+        $stmt->bindParam(':lastName', $lastName);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $hashedPassword);
+        $stmt->bindParam(':role', $role);
 
-    if ($result) {
-        $message = "Successfully registered";
-        $encodedMessage = urlencode($message);
-        header("Location: ../views/cart.php?email=" . urlencode($email) . "&msg=" . $encodedMessage);
-    } else {
-        $message = "Failed to register";
+        if ($stmt->execute()) {
+            $message = "Successfully registered";
+            $encodedMessage = urlencode($message);
+            header("Location: ../views/cart.php?email=" . urlencode($email) . "&msg=" . $encodedMessage);
+            exit();
+        } else {
+            header("Location: ../views/login.php?msg=Failed to register.");
+            exit();
+        }
+    } catch (PDOException $e) {
+        header("Location: ../views/login.php?msg=Database error: " . $e->getMessage());
+        exit();
     }
 }
 
@@ -48,18 +57,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $confirmPassword = $_POST['confirmPassword'];
     $role = 'Customer';
 
-
     $_SESSION['firstname'] = $firstName;
     $_SESSION['lastname'] = $lastName;
     $_SESSION['email'] = $email;
     $_SESSION['password'] = $password;
     $_SESSION['confirmPassword'] = $confirmPassword;
-    $_SESSION['hashedPassword'] = $hashedPassword;
-    $_SESSION['role'] = 'Customer';
-
+    $_SESSION['role'] = $role;
 
     // Validate required fields
-    if (empty($firstName) || empty($lastName) || empty($email) || empty($password) || empty($confirmPassword) || empty($role)) {
+    if (empty($firstName) || empty($lastName) || empty($email) || empty($password) || empty($confirmPassword)) {
         header("Location: ../views/login.php?msg=All fields must be filled");
         exit();
     }
@@ -83,43 +89,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // Check for existing email in the database
-    $stmt = $conn->prepare("SELECT email FROM users WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $stmt->store_result();
+    try {
+        // Check for existing email in the database
+        $stmt = $pdo->prepare("SELECT email FROM users WHERE email = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
 
-    if ($stmt->num_rows > 0) {
-        header("Location: ../views/login.php?msg=Email already exists. Please use a different email.");
-        echo $stmt->num_rows > 0;
+        if ($stmt->rowCount() > 0) {
+            header("Location: ../views/login.php?msg=Email already exists. Please use a different email.");
+            exit();
+        }
+
+        // If no errors, proceed with user registration
+        // Password hashing
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $_SESSION['hashedPassword'] = $hashedPassword;
+
+        // Generate OTP
+        $OTP = rand(100000, 999999);
+        $_SESSION['OTP'] = $OTP;
+        $_SESSION['registering'] = "registering";
+        $_SESSION['OTP_timestamp'] = time();
+
+        // Send OTP email
+        sendOTP($email, $OTP);
+
+        header("Location: ../views/verify_otp.php?msg=registering");
+        exit();
+    } catch (PDOException $e) {
+        header("Location: ../views/login.php?msg=Database error: " . $e->getMessage());
         exit();
     }
-
-    $stmt->close();
-
-    // If no errors, proceed with user registration
-    // Password hashing
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    $_SESSION['hashedPassword'] = $hashedPassword;
-
-    // Generate OTP
-    $OTP = rand(100000, 999999);
-    $registering = "registering";
-
-    $_SESSION['OTP_timestamp'] = time();
-    $_SESSION['registering'] = $registering;
-    $_SESSION['signingIn'] = $signingIn;
-
-    // Store OTP and email in session for verification later
-    $_SESSION['OTP'] = $OTP;
-    $_SESSION['email'] = $email;
-    $_SESSION['registering'] = $registering;
-
-    // Send OTP email
-    sendOTP($email, $OTP);
-
-    header("Location: ../views/verify_otp.php?msg=registering");
-    exit();
 }
 
 // Function to send OTP via email using PHPMailer
@@ -128,27 +128,26 @@ function sendOTP($email, $OTP) {
 
     try {
         // Server settings
-        $mail->isSMTP();                                        // Set mailer to use SMTP
-        $mail->Host = 'smtp.gmail.com';                         // Specify main and backup SMTP servers
-        $mail->SMTPAuth   = true;                               // Enable SMTP authentication
-        $mail->Username   = 'kobekootinsanwu@gmail.com';        // Your Outlook email address
-        $mail->Password   = 'jmvi iiki ugus zqnm';              // Your Outlook password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;     // Enable TLS encryption
-        $mail->Port       = 587;                                // TCP port to connect to
+        $mail->isSMTP();                                        
+        $mail->Host = 'smtp.gmail.com';                         
+        $mail->SMTPAuth   = true;                               
+        $mail->Username   = 'kobekootinsanwu@gmail.com';        
+        $mail->Password   = 'jmvi iiki ugus zqnm';              
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;     
+        $mail->Port       = 587;                                
 
         // Recipients
-        $mail->setFrom('kobekootinsanwu@gmail.com', 'Database Access Control'); // Your email address and name
-        $mail->addAddress($email); // Add a recipient
+        $mail->setFrom('kobekootinsanwu@gmail.com', 'Database Access Control'); 
+        $mail->addAddress($email);
 
         // Content
-        $mail->isHTML(true); // Set email format to HTML
+        $mail->isHTML(true);
         $mail->Subject = 'Your OTP Code';
         $mail->Body    = "Your One-Time Password (OTP) is <b>$OTP</b>. Please use this to complete your registration.";
         $mail->AltBody = "Your One-Time Password (OTP) is $OTP. Please use this to complete your registration.";
 
         $mail->send();
     } catch (Exception $e) {
-        // Handle errors (optional)
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
 }

@@ -10,8 +10,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
-include_once "../settings/connection.php";
-require '../vendor/autoload.php';
+include_once "../settings/connection.php"; // Include PDO connection
+require '../vendor/autoload.php'; // Autoload PHPMailer
 
 if (isset($_SESSION['email'])) {
     $email = $_SESSION['email'];
@@ -25,9 +25,25 @@ if (isset($_SESSION['email'])) {
     $_SESSION['email'] = $email;
     $_SESSION['OTP_timestamp'] = time();
 
+    // Optionally, store or update OTP in the database for further verification
+    try {
+        $sql = "UPDATE users SET OTP = :OTP, OTP_timestamp = :OTP_timestamp WHERE email = :email";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':OTP', $OTP, PDO::PARAM_INT);
+        $stmt->bindParam(':OTP_timestamp', $_SESSION['OTP_timestamp'], PDO::PARAM_INT);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
+    } catch (PDOException $e) {
+        echo "Database error: " . $e->getMessage();
+        exit();
+    }
+
     // Send OTP email
     sendOTP($email, $OTP);             
-    header("Location: ../views/verify_otp.php?msg=" . $message);
+
+    // Redirect to OTP verification page
+    header("Location: ../views/verify_otp.php?msg=OTP has been resent.");
+    exit();
 }
 
 // Function to send OTP via email using PHPMailer
@@ -54,6 +70,7 @@ function sendOTP($email, $OTP) {
         $mail->Body = "Your One-Time Password (OTP) is <b>$OTP</b>. Please use this to complete your registration.";
         $mail->AltBody = "Your One-Time Password (OTP) is $OTP. Please use this to complete your registration.";
 
+        // Send email
         $mail->send();
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";

@@ -4,12 +4,13 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
 
-// Include PHPMailer files
+// Include the database connection file
+include_once "../settings/connection.php";
+
+// Include PHPMailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
-
-include_once "../settings/connection.php";
 require '../vendor/autoload.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -20,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST['email'])) {
         $errors[] = "Email is required.";
     } else {
-        $email = mysqli_real_escape_string($conn, $_POST['email']);
+        $email = filter_var($email, FILTER_SANITIZE_EMAIL);
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errors[] = "Invalid email format.";
         }
@@ -34,66 +35,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($errors)) {
         $password = $_POST['password'];
 
-        // Prepare the SQL query
-        $stmt = $conn->prepare("SELECT userID, first_name, last_name, password, role FROM users WHERE email=?");
-        if ($stmt) {
-            $stmt->bind_param("s", $email);
+        try {
+            // Prepare the SQL query
+            $stmt = $pdo->prepare("SELECT userID, first_name, last_name, password, role FROM users WHERE email = :email");
+            $stmt->bindParam(":email", $email, PDO::PARAM_STR);
             $stmt->execute();
 
-            // Check for execution errors
-            if (!$stmt) {
-                $errors[] = "Database query error: " . $conn->error;
-            } else {
-                $result = $stmt->get_result();
+            // If the user is found
+            if ($stmt->rowCount() === 1) {
+                $row = $stmt->fetch();
 
-                // If the user is found
-                if ($result->num_rows == 1) {
-                    $row = $result->fetch_assoc();
+                // Verify the password
+                if (password_verify($password, $row['password'])) {
+                    // Set session variables
+                    $_SESSION['userID'] = $row['userID'];
+                    $_SESSION['fname'] = $row['first_name'];
+                    $_SESSION['lname'] = $row['last_name'];
+                    $_SESSION['role'] = $row['role'];
 
-                    // Verify the password
-                    if (password_verify($password, $row['password'])) {
-                        // Set session variables
-                        $_SESSION['userID'] = $row['userID'];
-                        $_SESSION['fname'] = $row['first_name'];
-                        $_SESSION['lname'] = $row['last_name'];
-                        // $_SESSION['role'] = $row['role'];
+                    // Generate OTP
+                    $OTP = rand(100000, 999999);
+                    $_SESSION['OTP'] = $OTP;
+                    $_SESSION['email'] = $email;
+                    $_SESSION['signingIn'] = "signingIn";
+                    $_SESSION['OTP_timestamp'] = time();
 
-                        // Generate OTP
-                        $OTP = rand(100000, 999999);
-                        $signingIn = "signingIn";
-                        echo $signingIn;
-                
-                        // Store OTP and email in session for verification later
-                        $_SESSION['OTP'] = $OTP;
-                        $_SESSION['email'] = $email;
-                        $_SESSION['signingIn'] = $signingIn;
-                        $_SESSION['OTP_timestamp'] = time();
+                    // Send OTP email
+                    sendOTP($email, $OTP);
 
-                        // Send OTP email
-                        sendOTP($email, $OTP);
-
-                        // After sending the OTP
-                        $message = "Successfully signed in. Kindly check your email for the OTP.";
-                        $encodedMessage = urlencode($message);
-                        header("Location: ../views/verify_otp.php?email=" . urlencode($email) . "&msg=" . $encodedMessage);
-                        exit();
-
-                    } else {
-                        header("Location: ../views/login.php?msg=Invalid email or password.");
-                        exit();
-                    }
+                    // Redirect to OTP verification
+                    $message = "Successfully signed in. Kindly check your email for the OTP.";
+                    $encodedMessage = urlencode($message);
+                    header("Location: ../views/verify_otp.php?email=" . urlencode($email) . "&msg=" . $encodedMessage);
+                    exit();
                 } else {
                     header("Location: ../views/login.php?msg=Invalid email or password.");
                     exit();
                 }
-                $stmt->close();
+            } else {
+                header("Location: ../views/login.php?msg=Invalid email or password.");
+                exit();
             }
-        } else {
-            header("Location: ../views/login.php?msg=Database query preparation error.");
+        } catch (PDOException $e) {
+            header("Location: ../views/login.php?msg=Database error: " . $e->getMessage());
             exit();
         }
     } else {
-        // If there are validation errors, concatenate them and pass via URL
+        // Concatenate errors and pass via URL
         header("Location: ../views/login.php?msg=" . urlencode(implode(" ", $errors)));
         exit();
     }
@@ -103,24 +91,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     exit();
 }
 
-
 // Function to send OTP via email using PHPMailer
 function sendOTP($email, $OTP) {
     $mail = new PHPMailer(true);
 
     try {
         // Server settings
-        $mail->isSMTP();                                            
-        $mail->Host = 'smtp.gmail.com';                         
-        $mail->SMTPAuth   = true;                                 
-        $mail->Username   = 'kobekootinsanwu@gmail.com';             
-        $mail->Password   = 'jmvi iiki ugus zqnm';              
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;      
-        $mail->Port       = 587;                                  
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'kobekootinsanwu@gmail.com';
+        $mail->Password = 'jmvi iiki ugus zqnm';
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
 
         // Recipients
         $mail->setFrom('kobekootinsanwu@gmail.com', 'Database Access Control');
-        $mail->addAddress($email);                                
+        $mail->addAddress($email);
 
         // Content
         $mail->isHTML(true);
