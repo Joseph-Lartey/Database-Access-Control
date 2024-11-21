@@ -100,6 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // If OTP matches for specific roles
     else if ($userOTP === $expectedOTP && $role === 'Administrator') {
         unset($_SESSION['OTP']);
+        header("Location: ../admin/dashboard.php?msg=OTP verified successfully.");
         exit();
     }
 
