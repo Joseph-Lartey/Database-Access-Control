@@ -3,11 +3,11 @@ session_start(); // Start session to access logged-in user's data
 include "../settings/connection.php"; // Database connection
 
 // Ensure user is logged in
-if (!isset($_SESSION['UserID'])) {
+if (!isset($_SESSION['userID'])) {
     die("You must be logged in to view your cart.");
 }
 
-$userID = $_SESSION['UserID'];
+$userID = $_SESSION['userID'];
 
 try {
     // Fetch the user's active (open) order
