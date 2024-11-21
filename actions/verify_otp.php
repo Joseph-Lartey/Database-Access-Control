@@ -1,13 +1,10 @@
 <?php
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-
 session_start();
-include "../settings/connection.php";
-
+include "../settings/connection.php"; // Include your PDO connection file
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $userOTP = implode('', $_POST['OTP']);
@@ -15,22 +12,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $signingIn = $_SESSION['signingIn'];
     $registering = $_SESSION['registering'];
 
-
     // Assuming the user ID is stored in the session after login
     $userID = $_SESSION['userID']; // Replace with your session key for user ID
 
-    // Query to fetch the user's role
-    $sql = "SELECT role FROM users WHERE userID = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $userID);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    try {
+        // Query to fetch the user's role using PDO
+        $sql = "SELECT role FROM users WHERE userID = :userID";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+        $stmt->execute();
 
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc(); // Fetch the row as an associative array
-        $role = $row['role']; // Access the 'role' column value
-    } else {
-        $role = 'Customer'; // Default role if no record is found
+        if ($stmt->rowCount() > 0) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch the row as an associative array
+            $role = $row['role']; // Access the 'role' column value
+        } else {
+            $role = 'Customer'; // Default role if no record is found
+        }
+    } catch (PDOException $e) {
+        die("Database error: " . $e->getMessage());
     }
 
     // Retrieve the hidden message from the POST data
@@ -58,49 +57,49 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
-    // Check if the user input OTP matches the expected OTP and the message is "Forgot Password"
+    // Check for other roles in a similar manner...
     else if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password' && $signingIn === 'signingIn' && $role === 'Sales Personnel') {
         unset($_SESSION['OTP']);
         header("Location: ../views/sales.php?msg=" . urlencode($message_1));
         exit();
     }
-    
-    // Check if the user input OTP matches the expected OTP and the message is "Forgot Password"
+
     else if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password' && $signingIn === 'signingIn' && $role === 'Inventory Manager') {
         unset($_SESSION['OTP']);
         header("Location: ../views/invent.php?msg=" . urlencode($message_1));
         exit();
     }
-    
-    // Check if the user input OTP matches the expected OTP and the message is "Forgot Password"
+
     else if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password' && $signingIn === 'signingIn' && $role === 'Customer') {
         unset($_SESSION['OTP']);
         header("Location: ../views/shop.php?msg=" . urlencode($message_1));
         exit();
     }
 
+    // Case for registering process
     else if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password '&& $registering === 'registering'){
         unset($_SESSION['OTP']);
         header("Location: ../views/home.php?msg=" . urlencode($message_1));
         exit();
     }
 
+    // If OTP matches and message is "Forgot Password", direct to reset page
     else if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password') {
         unset($_SESSION['OTP']);
         header("Location: ../views/reset_password.php?msg=" . urlencode($message_1));
         exit();
     }
 
+    // Check if OTP matches and user is registering
     else if ($userOTP === $expectedOTP && $message_1 === $registering) {
         unset($_SESSION['OTP']);
         header("Location: ../actions/register.php?msg=" . urlencode($message_1));
         exit();
     }
 
-    // Check if the entered OTP matches the expected OTP (as a string)
+    // If OTP matches for specific roles
     else if ($userOTP === $expectedOTP && $role === 'Administrator') {
         unset($_SESSION['OTP']);
-        // header("Location: ../views/admin.php?msg=OTP verified successfully.");
         exit();
     }
 
@@ -122,8 +121,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
-    // If the OTP does not match
+    // If OTP does not match
     header("Location: ../views/verify_otp.php?msg=Incorrect OTP. Please try again.");
     exit();
 }
+
 ?>
