@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = $_POST['password'];
 
         // Prepare the SQL query
-        $stmt = $conn->prepare("SELECT id, first_name, last_name, password FROM people WHERE email=?");
+        $stmt = $conn->prepare("SELECT userID, first_name, last_name, password, role FROM users WHERE email=?");
         if ($stmt) {
             $stmt->bind_param("s", $email);
             $stmt->execute();
@@ -53,9 +53,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Verify the password
                     if (password_verify($password, $row['password'])) {
                         // Set session variables
-                        $_SESSION['id'] = $row['id'];
+                        $_SESSION['userID'] = $row['userID'];
                         $_SESSION['fname'] = $row['first_name'];
                         $_SESSION['lname'] = $row['last_name'];
+                        // $_SESSION['role'] = $row['role'];
 
                         // Generate OTP
                         $OTP = rand(100000, 999999);
@@ -68,43 +69,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $_SESSION['signingIn'] = $signingIn;
                         $_SESSION['OTP_timestamp'] = time();
 
-
                         // Send OTP email
                         sendOTP($email, $OTP);
 
                         // After sending the OTP
                         $message = "Successfully signed in. Kindly check your email for the OTP.";
                         $encodedMessage = urlencode($message);
-                        header("Location: ../view/verify_otp.php?email=" . urlencode($email) . "&msg=" . $encodedMessage);
+                        header("Location: ../views/verify_otp.php?email=" . urlencode($email) . "&msg=" . $encodedMessage);
                         exit();
-                
-                        // Redirect to OTP verification page
-                        header("Location: ../view/verify_otp.php");
-                        exit();
+
                     } else {
-                        header("Location: ../view/login.php?msg=Invalid email or password.");
+                        header("Location: ../views/login.php?msg=Invalid email or password.");
                         exit();
                     }
                 } else {
-                    header("Location: ../view/login.php?msg=Invalid email or password.");
+                    header("Location: ../views/login.php?msg=Invalid email or password.");
                     exit();
                 }
                 $stmt->close();
             }
         } else {
-            header("Location: ../view/login.php?msg=Database query preparation error.");
+            header("Location: ../views/login.php?msg=Database query preparation error.");
             exit();
         }
     } else {
         // If there are validation errors, concatenate them and pass via URL
-        header("Location: ../view/login.php?msg=" . urlencode(implode(" ", $errors)));
+        header("Location: ../views/login.php?msg=" . urlencode(implode(" ", $errors)));
         exit();
     }
 } else {
     // Handle invalid request method
-    header("Location: ../view/login.php?msg=Invalid request method.");
+    header("Location: ../views/login.php?msg=Invalid request method.");
     exit();
 }
+
 
 // Function to send OTP via email using PHPMailer
 function sendOTP($email, $OTP) {

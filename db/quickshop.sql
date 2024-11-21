@@ -1,15 +1,17 @@
 -- Step 1: Create the database
-CREATE DATABASE QuickShop;
+DROP DATABASE IF EXISTS quickshop;
+CREATE DATABASE quickshop;
 USE QuickShop;
 
 -- Step 2: Create tables
 -- Users table
 CREATE TABLE Users (
-    UserID INT AUTO_INCREMENT PRIMARY KEY,
-    Name VARCHAR(100) NOT NULL,
-    Email VARCHAR(150) UNIQUE NOT NULL,
-    Password VARCHAR(255) NOT NULL, -- Hashed passwords recommended
-    Role ENUM('Administrator', 'Sales Personnel', 'Inventory Manager', 'Customer') NOT NULL
+    userID INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(150) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL, -- Hashed passwords recommended
+    role ENUM('Administrator', 'Sales Personnel', 'Inventory Manager', 'Customer') NOT NULL
 );
 
 -- Products table
