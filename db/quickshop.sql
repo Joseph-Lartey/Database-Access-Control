@@ -12,7 +12,14 @@ CREATE TABLE Users (
     email VARCHAR(150) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL, -- Hashed passwords recommended
     role ENUM('Administrator', 'Sales Personnel', 'Inventory Manager', 'Customer') NOT NULL
-    ProfileImage VARCHAR(255) -- URL or file path to the user's profile image
+=========
+    UserID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Email VARCHAR(150) UNIQUE NOT NULL,
+    Password VARCHAR(255) NOT NULL, -- Hashed passwords recommended
+    Role ENUM('Administrator', 'Sales Personnel', 'Inventory Manager', 'Customer') NOT NULL,
+    ProfileImage VARCHAR(255)
+>>>>>>>>> Temporary merge branch 2
 );
 
 -- Products table
