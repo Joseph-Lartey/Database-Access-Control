@@ -98,7 +98,10 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
+                    <?php include "../actions/get_cart.php"; ?>
+
+
+					<!-- <tr>
 						<td>Product Name 1</td>
 						<td>$25.00</td>
 						<td>2</td>
@@ -111,8 +114,7 @@
 						<td>1</td>
 						<td>$35.00</td>
 						<td><span class="remove-btn">Remove</span></td>
-					</tr>
-					<!-- Add more cart items as needed -->
+					</tr> -->
 				</tbody>
 			</table>
 
