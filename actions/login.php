@@ -119,7 +119,7 @@ function sendOTP($email, $OTP) {
         $mail->Port       = 587;                                  
 
         // Recipients
-        $mail->setFrom('kobekootinsanwu@gmail.com', 'Two Factor Authentication Website');
+        $mail->setFrom('kobekootinsanwu@gmail.com', 'Database Access Control');
         $mail->addAddress($email);                                
 
         // Content

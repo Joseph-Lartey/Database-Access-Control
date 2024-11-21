@@ -321,6 +321,20 @@ nav .profile .profile-link a {
 nav .profile .profile-link a:hover {
 	background: var(--grey);
 }
+.nav-right {
+	margin-left: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.nav-right .profile-pic {
+	width: 40px; /* Adjust size as needed */
+	height: 40px;
+	border-radius: 50%; /* Makes it circular */
+	object-fit: cover;
+	cursor: pointer;
+}
 /* NAVBAR */
 
 
