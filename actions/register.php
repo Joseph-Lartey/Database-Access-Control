@@ -137,7 +137,7 @@ function sendOTP($email, $OTP) {
         $mail->Port       = 587;                                // TCP port to connect to
 
         // Recipients
-        $mail->setFrom('kobekootinsanwu@gmail.com', 'Two Factor Authentication Website'); // Your email address and name
+        $mail->setFrom('kobekootinsanwu@gmail.com', 'Database Access Control'); // Your email address and name
         $mail->addAddress($email); // Add a recipient
 
         // Content
