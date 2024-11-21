@@ -52,30 +52,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Check if the user input OTP matches the expected OTP and the message is "Forgot Password"
-    if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password' && $signingIn === 'signingIn' && $role = 'Administrator') {
+    if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password' && $signingIn === 'signingIn' && $role === 'Administrator') {
         unset($_SESSION['OTP']);
         header("Location: ../views/admin.php?msg=" . urlencode($message_1));
         exit();
     }
 
     // Check if the user input OTP matches the expected OTP and the message is "Forgot Password"
-    else if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password' && $signingIn === 'signingIn' && $role = 'Sales Personnel') {
+    else if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password' && $signingIn === 'signingIn' && $role === 'Sales Personnel') {
         unset($_SESSION['OTP']);
         header("Location: ../views/sales.php?msg=" . urlencode($message_1));
         exit();
     }
     
     // Check if the user input OTP matches the expected OTP and the message is "Forgot Password"
-    else if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password' && $signingIn === 'signingIn' && $role = 'Inventory Manager') {
+    else if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password' && $signingIn === 'signingIn' && $role === 'Inventory Manager') {
         unset($_SESSION['OTP']);
         header("Location: ../views/invent.php?msg=" . urlencode($message_1));
         exit();
     }
     
     // Check if the user input OTP matches the expected OTP and the message is "Forgot Password"
-    else if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password' && $signingIn === 'signingIn' && $role = 'Customer') {
+    else if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password' && $signingIn === 'signingIn' && $role === 'Customer') {
         unset($_SESSION['OTP']);
-        header("Location: ../views/cart.php?msg=" . urlencode($message_1));
+        header("Location: ../views/shop.php?msg=" . urlencode($message_1));
         exit();
     }
 
@@ -98,25 +98,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Check if the entered OTP matches the expected OTP (as a string)
-    else if ($userOTP === $expectedOTP && $role = 'Administrator') {
+    else if ($userOTP === $expectedOTP && $role === 'Administrator') {
         unset($_SESSION['OTP']);
-        header("Location: ../views/admin.php?msg=OTP verified successfully.");
+        // header("Location: ../views/admin.php?msg=OTP verified successfully.");
         exit();
     }
 
-    else if ($userOTP === $expectedOTP && $role = 'Sales Personnel') {
+    else if ($userOTP === $expectedOTP && $role === 'Sales Personnel') {
         unset($_SESSION['OTP']);
         header("Location: ../views/sales.php?msg=OTP verified successfully.");
         exit();
     }
 
-    else if ($userOTP === $expectedOTP && $role = 'Inventory Manager') {
+    else if ($userOTP === $expectedOTP && $role === 'Inventory Manager') {
         unset($_SESSION['OTP']);
         header("Location: ../views/invent.php?msg=OTP verified successfully.");
         exit();
     }
 
-    else if ($userOTP === $expectedOTP && $role = 'Customer') {
+    else if ($userOTP === $expectedOTP && $role === 'Customer') {
         unset($_SESSION['OTP']);
         header("Location: ../views/cart.php?msg=OTP verified successfully.");
         exit();
