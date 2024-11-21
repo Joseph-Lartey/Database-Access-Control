@@ -40,7 +40,6 @@
 	<section id="sidebar">
 		<a href="../admin/admin.php" class="brand"><i class='bx bxs-smile icon'></i>QuickShop</a>
 		<ul class="side-menu">
-			<li><a href="../view/dashboard.php"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
 			<li><a href="../view/shop.php"><i class='bx bxs-store icon'></i> Shop</a></li>
 			<li><a href="../view/cart.php"><i class='bx bxs-cart icon'></i> Cart</a></li>
 			<li><a href="../view/profile.php"><i class='bx bxs-user icon'></i> Profile</a></li>

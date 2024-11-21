@@ -57,6 +57,47 @@
 		.product-card .buy-btn:hover {
 			background-color: #2a91d0;
 		}
+
+        .quantity-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .quantity-input {
+        width: 60px;
+        height: 30px;
+        text-align: center;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        outline: none;
+        transition: border-color 0.3s;
+    }
+
+    .quantity-input:focus {
+        border-color: #2a91d0;
+        box-shadow: 0 0 5px rgba(42, 145, 208, 0.5);
+    }
+
+    .buy-btn {
+        display: inline-block;
+        padding: 8px 15px;
+        background-color: #923d41;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .buy-btn:hover {
+        background-color: #2a91d0;
+    }
+
 	</style>
 </head>
 <body>
@@ -64,7 +105,6 @@
 	<section id="sidebar">
 		<a href="../admin/admin.php" class="brand"><i class='bx bxs-smile icon'></i> QuickShop</a>
 		<ul class="side-menu">
-			<li><a href="../view/dashboard.php"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
 			<li><a href="../view/shop.php" class="active"><i class='bx bxs-store icon'></i> Shop</a></li>
 			<li><a href="../view/cart.php"><i class='bx bxs-cart icon'></i> Cart</a></li>
 			<li><a href="../view/profile.php"><i class='bx bxs-user icon'></i> Profile</a></li>
@@ -101,32 +141,54 @@
 			</ul>
 
 			<div class="shop-grid">
+                <?php
+                include "../actions/get_products.php"
+
+                ?>
 				<!-- Product Card Example -->
-				<div class="product-card">
-					<img src="../images/12.jpg" alt="Product 1">
-					<h3>Product Name 1</h3>
-					<p>Short description of the product.</p>
-					<span class="price">$25.00</span>
-					<a href="#" class="buy-btn">Buy Now</a>
-				</div>
-				<div class="product-card">
-					<img src="../images/12.jpg" alt="Product 2">
-					<h3>Product Name 2</h3>
-					<p>Short description of the product.</p>
-					<span class="price">$35.00</span>
-					<a href="#" class="buy-btn">Buy Now</a>
-				</div>
-				<div class="product-card">
-					<img src="../images/12.jpg" alt="Product 3">
-					<h3>Product Name 3</h3>
-					<p>Short description of the product.</p>
-					<span class="price">$45.00</span>
-					<a href="#" class="buy-btn">Buy Now</a>
-				</div>
+                <!-- <div class="product-card">
+                    <img src="../images/12.jpg" alt="Product 1">
+                    <h3>Product Name 1</h3>
+                    <p>Short description of the product.</p>
+                    <span class="price">$25.00</span>
+                    <input type="number" class="quantity-input" placeholder="Qty" min="1" value="1">
+                    <button class="buy-btn">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="../images/12.jpg" alt="Product 1">
+                    <h3>Product Name 1</h3>
+                    <p>Short description of the product.</p>
+                    <span class="price">$25.00</span>
+                    <input type="number" class="quantity-input" placeholder="Qty" min="1" value="1">
+                    <button class="buy-btn">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="../images/12.jpg" alt="Product 1">
+                    <h3>Product Name 1</h3>
+                    <p>Short description of the product.</p>
+                    <span class="price">$25.00</span>
+                    <input type="number" class="quantity-input" placeholder="Qty" min="1" value="1">
+                    <button class="buy-btn">Add to Cart</button>
+                </div> -->
 				<!-- Add more products as needed -->
 			</div>
 		</main>
 	</section>
+
+    <script>
+        document.querySelectorAll('.buy-btn').forEach((button) => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const productCard = button.closest('.product-card');
+            const quantityInput = productCard.querySelector('.quantity-input');
+            const quantity = quantityInput.value || 1; // Default to 1 if not entered
+
+            console.log(`Adding ${quantity} items to cart for product: ${productCard.querySelector('h3').textContent}`);
+            // Handle cart addition here
+        });
+    });
+
+    </script>
 
 </body>
 </html>
