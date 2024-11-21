@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Check if the user input OTP matches the expected OTP and the message is "Forgot Password"
     else if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password' && $signingIn === 'signingIn' && $role = 'Customer') {
         unset($_SESSION['OTP']);
-        header("Location: ../views/cart.php?msg=" . urlencode($message_1));
+        header("Location: ../views/shop.php?msg=" . urlencode($message_1));
         exit();
     }
 
