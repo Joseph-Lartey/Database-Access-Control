@@ -9,7 +9,8 @@ CREATE TABLE Users (
     Name VARCHAR(100) NOT NULL,
     Email VARCHAR(150) UNIQUE NOT NULL,
     Password VARCHAR(255) NOT NULL, -- Hashed passwords recommended
-    Role ENUM('Administrator', 'Sales Personnel', 'Inventory Manager', 'Customer') NOT NULL
+    Role ENUM('Administrator', 'Sales Personnel', 'Inventory Manager', 'Customer') NOT NULL,
+    ProfileImage VARCHAR(255) -- URL or file path to the user's profile image
 );
 
 -- Products table
@@ -18,7 +19,8 @@ CREATE TABLE Products (
     Name VARCHAR(150) NOT NULL,
     Description TEXT,
     Price DECIMAL(10, 2) NOT NULL,
-    StockQuantity INT NOT NULL
+    StockQuantity INT NOT NULL,
+    ProductImage VARCHAR(255) -- URL or file path to the product image
 );
 
 -- Orders table
