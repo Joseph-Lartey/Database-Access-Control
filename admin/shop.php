@@ -56,7 +56,7 @@
 
 			<div class="shop-grid">
                 <?php
-                include "../actions/get_products.php"
+                include "../actions/get_admin_products.php"
                 ?>
 			</div>
 		</main>

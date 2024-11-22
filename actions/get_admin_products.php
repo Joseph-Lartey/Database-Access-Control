@@ -19,7 +19,13 @@ try {
                 <input type="number" class="quantity-input" placeholder="Qty" min="1" value="1">
                 <a href="../actions/add_product.php?product_id=' . htmlspecialchars($product['ProductID']) . '" class="add-btn">
                     <button type="button" class="add-btn">Add to Cart</button>
-                </a>           
+                </a>
+                <a href="../actions/delete_product.php?product_id=' . htmlspecialchars($product['ProductID']) . '" class="delete-btn">
+                    <button type="button" class="delete-btn">Delete Item</button>
+                </a>
+                <a href="../admin/modify_product.php?product_id=' . htmlspecialchars($product['ProductID']) . '" class="modify-btn">
+                    <button type="button" class="modify-btn">Modify Item</button>
+                </a>            
             </div>';
         }
     } else {
