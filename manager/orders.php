@@ -23,12 +23,26 @@
     </section>
 
     <section id="content">
-        <nav>
-            <i class='bx bx-menu toggle-sidebar'></i>
-            <div class="nav-right">
-                <img src="../images/12.jpg" alt="Profile Picture" class="profile-pic">
-            </div>
-        </nav>
+
+		<nav>
+			<i class='bx bx-menu toggle-sidebar' ></i>
+			<form action="#">
+				<div class="form-group">
+					<input type="text" placeholder="Search...">
+					<i class='bx bx-search icon' ></i>
+				</div>
+			</form>
+			<!-- <a href="#" class="nav-link">
+				<i class='bx bxs-bell icon' ></i>
+				<span class="badge">5</span>
+			</a>
+			<a href="#" class="nav-link">
+				<i class='bx bxs-message-square-dots icon' ></i>
+				<span class="badge">8</span>
+			</a> -->
+			<div class="nav-right">
+				<img src="../images/12.jpg" alt="Profile Picture" class="profile-pic">
+			</div>
 
         <main>
             <h1 class="title">Orders</h1>
