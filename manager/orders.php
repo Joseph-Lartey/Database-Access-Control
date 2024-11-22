@@ -60,6 +60,7 @@
 			<div class="nav-right">
 				<img src="../images/12.jpg" alt="Profile Picture" class="profile-pic">
 			</div>
+        </nav>
 
         <main>
             <h1 class="title">Orders</h1>
