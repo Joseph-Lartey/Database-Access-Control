@@ -1,3 +1,8 @@
+<?php
+include_once "../actions/getuserDetails.php"
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +11,99 @@
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<link rel="stylesheet" href="../css/dashboard.css">
 	<title>Shop</title>
+    <style>
+		.shop-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+			gap: 20px;
+			padding: 20px;
+		}
+		.product-card {
+			border: 1px solid #ddd;
+			border-radius: 10px;
+			overflow: hidden;
+			text-align: center;
+			background-color: #fff;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+			transition: transform 0.2s ease-in-out;
+		}
+		.product-card:hover {
+			transform: translateY(-5px);
+		}
+		.product-card img {
+			width: 100%;
+			height: 150px;
+			object-fit: cover;
+		}
+		.product-card h3 {
+			font-size: 18px;
+			margin: 10px 0;
+		}
+		.product-card p {
+			color: #777;
+			font-size: 14px;
+			margin: 10px;
+		}
+		.product-card .price {
+			font-weight: bold;
+			color: #333;
+			font-size: 16px;
+		}
+		.product-card .buy-btn {
+			display: inline-block;
+			margin: 10px 0;
+			padding: 10px 20px;
+			background-color: #923d41;
+			color: #fff;
+			border-radius: 5px;
+			text-decoration: none;
+			transition: background-color 0.3s;
+		}
+		.product-card .buy-btn:hover {
+			background-color: #2a91d0;
+		}
+
+        .quantity-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .quantity-input {
+        width: 60px;
+        height: 30px;
+        text-align: center;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        outline: none;
+        transition: border-color 0.3s;
+    }
+
+    .quantity-input:focus {
+        border-color: #2a91d0;
+        box-shadow: 0 0 5px rgba(42, 145, 208, 0.5);
+    }
+
+    .buy-btn {
+        display: inline-block;
+        padding: 8px 15px;
+        background-color: #923d41;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .buy-btn:hover {
+        background-color: #2a91d0;
+    }
+    </style>
+
 </head>
 <body>
 
@@ -13,9 +111,8 @@
 		<a href="../admin/admin.php" class="brand"><i class='bx bxs-smile icon'></i> QuickShop</a>
 		<ul class="side-menu">
 			<li><a href="../views/shop.php" class="active"><i class='bx bxs-store icon'></i> Shop</a></li>
-			<li><a href="../views/cart.php"><i class='bx bxs-cart icon'></i> Cart</a></li>
+			<li><a href="../views/cart.php"><i class='bx bxs-cart icon'></i> Orders</a></li>
 			<li><a href="../views/profile.php"><i class='bx bxs-user icon'></i> Profile</a></li>
-			<li><a href="../views/history.php"><i class='bx bx-history icon'></i> History</a></li>
 		</ul>
 		<div class="ads">
 			<div class="wrapper">
@@ -35,7 +132,7 @@
 				</div>
 			</form>
 			<div class="nav-right">
-				<img src="../path-to-your-image/image.png" alt="Profile Picture" class="profile-pic">
+                <?php echo getUserProfileImage() ?>
 			</div>
 		</nav>
 
@@ -69,6 +166,47 @@
     });
 
     </script>
+
+	<script>
+	function addToCart(button) {
+    const productID = button.getAttribute('data-product-id');
+    const productCard = button.closest('.product-card');
+    const quantityInput = productCard.querySelector('.quantity-input');
+    const quantity = quantityInput.value || 1;
+
+    if (!productID) {
+        alert("Error: Product ID is missing.");
+        return;
+    }
+    if (quantity <= 0) {
+        alert("Please enter a valid quantity.");
+        return;
+    }
+
+    console.log(`ProductID: ${productID}, Quantity: ${quantity}`);
+
+    fetch('../actions/add_to_cart.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `ProductID=${encodeURIComponent(productID)}&Quantity=${encodeURIComponent(quantity)}`
+    })
+        .then(response => response.text())
+        .then(data => {
+            alert(data); // Display success or error message
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("An error occurred while adding the product to the cart.");
+        });
+}
+
+
+
+
+
+	</script>
 
 </body>
 </html>
