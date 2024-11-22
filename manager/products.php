@@ -56,7 +56,7 @@
 
         /* Styling for buttons */
         button {
-            background-color: #e74c3c;
+            background-color: #923d41;
             color: #fff;
             border: none;
             border-radius: 4px;
@@ -64,12 +64,12 @@
             font-size: 14px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            width: 100px;
+            
             text-align: center;
         }
 
         button:hover {
-            background-color: #c0392b;
+            background-color: #2a91d0;
         }
     </style>
 </head>
@@ -104,11 +104,6 @@
 
         <main>
             <h1 class="title">Products</h1>
-            <div class="ads">
-                <div class="wrapper">
-                    <a href="../login/logout.php" class="btn-upgrade">Logout</a>
-                </div>
-            </div>
             <button onclick="updateStock()">Update Stock</button>
             <table>
                 <thead>
