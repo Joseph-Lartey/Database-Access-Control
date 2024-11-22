@@ -6,6 +6,23 @@
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../css/dashboard.css">
     <title>View Orders</title>
+    <style>
+		.nav-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-right .profile-pic {
+    width: 40px; /* Adjust size as needed */
+    height: 40px;
+    border-radius: 50%; /* Makes it circular */
+    object-fit: cover;
+    cursor: pointer;
+}
+
+	</style>
 </head>
 <body>
     <section id="sidebar">
