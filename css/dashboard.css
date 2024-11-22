@@ -155,7 +155,6 @@ li {
 #sidebar .ads {
 	width: 100%;
 	padding: 20px;
-	margin-top: 150%;
 }
 #sidebar.hide .ads {
 	display: none;
@@ -608,6 +607,219 @@ main .btn-send {
 main .btn-send:hover {
 	background: var(--dark-blue);
 }
+
+
+/* Manage User Roles */
+.user-cards-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping to the next row if there's not enough space */
+    gap: 20px; /* Adds spacing between cards */
+    justify-content: center; /* Centers cards horizontally */
+    margin-top: 20px;
+}
+
+.user-card {
+    background: var(--light);
+    border-radius: 10px;
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* User Profile Image */
+.user-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* User Name */
+.user-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 6px;
+}
+
+/* User Information Text */
+.user-card p {
+    font-size: 14px;
+    color: var(--dark-grey);
+    margin: 4px 0;
+}
+
+/* Form for Role Management */
+.user-card form {
+    margin-top: 12px;
+    text-align: left;
+}
+
+/* Role Label */
+.user-card form label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--dark-grey);
+    display: block;
+    margin-bottom: 6px;
+}
+
+/* Dropdown for Role Selection */
+.user-card form select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--grey);
+    background: var(--light);
+    font-size: 14px;
+    color: var(--dark);
+    margin-bottom: 10px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.user-card form select:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 1px var(--blue), 0 0 0 4px var(--light-blue);
+}
+
+/* Update Role Button */
+.update-role-btn {
+    padding: 10px 16px;
+    border-radius: 5px;
+    background: var(--blue);
+    color: var(--light);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.update-role-btn:hover {
+    background: var(--dark-blue);
+}
+
+
+
+
+
+
+
+/* Container for product cards */
+.product-cards-container {
+    display: flex;             /* Use flexbox */
+    flex-wrap: wrap;           /* Allow cards to wrap to the next line on small screens */
+    gap: 20px;                 /* Space between cards */
+    justify-content: center;   /* Center the cards horizontally */
+    margin-top: 20px;
+}
+
+/* Individual product card */
+.product-card {
+    background: var(--light);
+    border-radius: 10px;
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    max-width: 300px;          /* Adjust to make the cards a bit smaller */
+    flex: 1 1 200px;           /* Allow the cards to grow and shrink with a minimum width */
+}
+
+/* Image in the product card */
+.product-card img {
+    width: 100%;
+    height: 200px;             /* Fixed height for images */
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* Product name */
+.product-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 8px;
+}
+
+/* Product description */
+.product-card p {
+    font-size: 14px;
+    color: var(--dark-grey);
+    margin: 4px 0;
+}
+
+/* Price styling */
+.product-card .price {
+    font-size: 16px;
+    color: var(--green);
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+/* Quantity input */
+.product-card .quantity-input {
+    padding: 6px;
+    width: 60px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid var(--grey);
+}
+
+/* Button styles */
+.product-card .buy-btn,
+.product-card .add-btn,
+.product-card .delete-btn,
+.product-card .modify-btn {
+    background-color: var(--blue);
+    color: var(--light);
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px 0;
+    border: none;
+    transition: background 0.3s ease;
+    width: 100%;              /* Ensure buttons are the same width */
+}
+
+/* Hover effect for buttons */
+.product-card .buy-btn:hover,
+.product-card .add-btn:hover,
+.product-card .delete-btn:hover,
+.product-card .modify-btn:hover {
+    background-color: var(--dark-blue);
+}
+
+/* Delete and Modify buttons styling */
+.product-card .add-btn,
+.product-card .delete-btn,
+.product-card .modify-btn {
+    display: block;
+    width: 100%;              /* Full width to match Add to Cart button size */
+    margin-top: 5px;
+    text-align: center;
+}
+
+/* Optional: Adjust spacing between buttons */
+.product-card .buy-btn {
+    margin-bottom: 10px;      /* Ensure spacing between Add to Cart and other buttons */
+}
+
+
+
+
+
+
 /* MAIN */
 /* CONTENT */
 

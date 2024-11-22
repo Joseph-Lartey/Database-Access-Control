@@ -323,7 +323,44 @@ nav .profile .profile-link a:hover {
 }
 /* NAVBAR */
 
-
+.cart-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 20px 0;
+}
+.cart-table th, .cart-table td {
+	padding: 15px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+.cart-table th {
+	background-color: #f4f4f4;
+	font-weight: bold;
+}
+.cart-table .remove-btn {
+	color: #ff5252;
+	cursor: pointer;
+}
+.total-container {
+	text-align: right;
+	padding: 20px;
+}
+.total-container .total-price {
+	font-size: 20px;
+	font-weight: bold;
+}
+.total-container .checkout-btn {
+	display: inline-block;
+	padding: 10px 20px;
+	background-color: #36a2eb;
+	color: #fff;
+	border-radius: 5px;
+	text-decoration: none;
+	margin-top: 10px;
+}
+.total-container .checkout-btn:hover {
+	background-color: #2a91d0;
+}
 
 /* MAIN */
 main {

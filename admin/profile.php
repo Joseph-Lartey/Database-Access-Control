@@ -1,8 +1,3 @@
-<?php
-include_once "../actions/getuserDetails.php"
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,9 +15,13 @@ include_once "../actions/getuserDetails.php"
 	<section id="sidebar">
 		<a href="../admin/admin.php" class="brand"><i class='bx bxs-smile icon'></i> QuickShop</a>
 		<ul class="side-menu">
-			<li><a href="../views/shop.php"><i class='bx bxs-store icon'></i> Shop</a></li>
-			<li><a href="../views/cart.php"><i class='bx bxs-cart icon'></i> Orders</a></li>
-			<li><a href="../views/profile.php" class="active"><i class='bx bxs-user icon'></i> Profile</a></li>
+            <li><a href="../admin/dashboard.php" class="active"><i class='bx bxs-dashboard icon' ></i> Dashboard</a></li>
+			<li><a href="../admin/shop.php"><i class='bx bxs-store icon'></i> Shop</a></li>
+			<li><a href="../admin/cart.php"><i class='bx bxs-cart icon'></i> Cart</a></li>
+			<li><a href="../admin/profile.php" class="active"><i class='bx bxs-user icon'></i> Profile</a></li>
+			<li><a href="../admin/history.php" ><i class='bx bx-history icon'></i> History</a></li>
+            <li><a href="../admin/manage_role.php"><i class='bx bx-history icon' ></i>Manage Users</a></li>
+
 		</ul>
 		<div class="ads">
 			<div class="wrapper">
@@ -41,8 +40,7 @@ include_once "../actions/getuserDetails.php"
 				</div>
 			</form>
 			<div class="nav-right">
-            <?php echo getUserProfileImage() ?>
-				 
+				<img src="../path-to-your-image/image.png" alt="Profile Picture" class="profile-pic">
 			</div>
 		</nav>
 	
@@ -58,16 +56,13 @@ include_once "../actions/getuserDetails.php"
                 <div id="profile-page">
                     <div class="profile-info">
                         <div class="profile-image-container">
-                            <?php echo getUserProfileImage() ?>
+                            <img src="../images/12.jpg" alt="Profile Picture" class="profile-image">
                         </div>
                         <div class="user-details">
-                            <?php
-                            echo getUserProfileDetails() ;
-                            ?>
-                            <!-- <p><strong>Name:</strong> John Doe</p>
+                            <p><strong>Name:</strong> John Doe</p>
                             <p><strong>Email:</strong> johndoe@example.com</p>
                             <p><strong>Date of Birth:</strong> January 1, 1990</p>
-                            <p><strong>Phone Number:</strong> 059977320</p> -->
+                            <p><strong>Phone Number:</strong> 059977320</p>
                         </div>
                     </div>
                     <div class="profile-actions">
@@ -83,7 +78,7 @@ include_once "../actions/getuserDetails.php"
             <div id="editUsernameModal" class="modal">
                 <div class="modal-content">
                     <span class="close">&times;</span>
-                    <form action="../actions/editUsername_action.php" method="POST">
+                    <form action="#">
                         <label for="Firstname">Firstname:</label>
                         <input type="text" id="Firstname" name="Firstname">
                         <label for="username">Lastname:</label>
@@ -96,7 +91,7 @@ include_once "../actions/getuserDetails.php"
             <div id="editEmailModal" class="modal">
                 <div class="modal-content">
                     <span class="close">&times;</span>
-                    <form action="../actions/editEmail_action.php" method="POST">
+                    <form action="#">
                         <label for="oldEmail">Old Email:</label>
                         <input type="email" id="oldEmail" name="old_email">
                         <label for="newEmail">New Email:</label>
@@ -109,7 +104,7 @@ include_once "../actions/getuserDetails.php"
             <div id="changePasswordModal" class="modal">
                 <div class="modal-content">
                     <span class="close">&times;</span>
-                    <form action="../actions/ChangePassword_action.php" method="POST">
+                    <form action="#">
                         <label for="currentPassword">Current Password:</label>
                         <input type="password" id="currentPassword" name="currentPassword" required>
                         <label for="newPassword">New Password:</label>
@@ -124,7 +119,7 @@ include_once "../actions/getuserDetails.php"
             <div id="addImageModal" class="modal">
                 <div class="modal-content">
                     <span class="close">&times;</span>
-                    <form action="../actions/Add_image_action.php" method="POST" enctype="multipart/form-data">
+                    <form action="#" method="POST" enctype="multipart/form-data">
                         <label for="image">Choose Image:</label>
                         <input type="file" id="image" name="image">
                         <button type="submit">Upload</button>
@@ -180,7 +175,7 @@ include_once "../actions/getuserDetails.php"
         });
     </script>
 
-	<script src="../public/javascript/admin.js"></script>
+	<script src="../public/js/admin.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </body>
 </html>

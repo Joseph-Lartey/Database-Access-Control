@@ -19,7 +19,7 @@ if (isset($_SESSION['email'])) {
 
     // Generate OTP
     $OTP = rand(100000, 999999);
-        
+
     // Store OTP and email in session for verification later
     $_SESSION['OTP'] = $OTP;
     $_SESSION['email'] = $email;
@@ -39,7 +39,7 @@ if (isset($_SESSION['email'])) {
     }
 
     // Send OTP email
-    sendOTP($email, $OTP);             
+    sendOTP($email, $OTP);
 
     // Redirect to OTP verification page
     header("Location: ../views/verify_otp.php?msg=OTP has been resent.");
@@ -47,7 +47,8 @@ if (isset($_SESSION['email'])) {
 }
 
 // Function to send OTP via email using PHPMailer
-function sendOTP($email, $OTP) {
+function sendOTP($email, $OTP)
+{
     $mail = new PHPMailer(true);
 
     try {
@@ -61,7 +62,7 @@ function sendOTP($email, $OTP) {
         $mail->Port = 587;
 
         // Recipients
-        $mail->setFrom('kobekootinsanwu@gmail.com', 'Two Factor Authentication Website');
+        $mail->setFrom('kobekootinsanwu@gmail.com', 'Database Access Control');
         $mail->addAddress($email);
 
         // Content

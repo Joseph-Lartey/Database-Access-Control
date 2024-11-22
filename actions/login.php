@@ -7,11 +7,8 @@ session_start();
 // Include the database connection file
 include_once "../settings/connection.php";
 
-// Include PHPMailer
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
-require '../vendor/autoload.php';
+// Include the OTP generation function
+include_once "../functions/send_OTP.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
@@ -89,34 +86,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Handle invalid request method
     header("Location: ../views/login.php?msg=Invalid request method.");
     exit();
-}
-
-// Function to send OTP via email using PHPMailer
-function sendOTP($email, $OTP) {
-    $mail = new PHPMailer(true);
-
-    try {
-        // Server settings
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = 'kobekootinsanwu@gmail.com';
-        $mail->Password = 'jmvi iiki ugus zqnm';
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port = 587;
-
-        // Recipients
-        $mail->setFrom('kobekootinsanwu@gmail.com', 'Database Access Control');
-        $mail->addAddress($email);
-
-        // Content
-        $mail->isHTML(true);
-        $mail->Subject = 'Your OTP Code';
-        $mail->Body    = "Your One-Time Password (OTP) is <b>$OTP</b>. Please use this to complete your registration.";
-        $mail->AltBody = "Your One-Time Password (OTP) is $OTP. Please use this to complete your registration.";
-
-        $mail->send();
-    } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-    }
 }

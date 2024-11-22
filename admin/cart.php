@@ -1,67 +1,24 @@
-<?php
-include_once "../actions/getuserDetails.php"
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewsport" content="width=device-width, initial-scale=1.0">
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-	<link rel="stylesheet" href="../css/dashboard.css">
-	<title>orders</title>
-	<style>
-		.cart-table {
-			width: 100%;
-			border-collapse: collapse;
-			margin: 20px 0;
-		}
-		.cart-table th, .cart-table td {
-			padding: 15px;
-			text-align: left;
-			border-bottom: 1px solid #ddd;
-		}
-		.cart-table th {
-			background-color: #f4f4f4;
-			font-weight: bold;
-		}
-		.cart-table .remove-btn {
-			color: #ff5252;
-			cursor: pointer;
-		}
-		.total-container {
-			text-align: right;
-			padding: 20px;
-		}
-		.total-container .total-price {
-			font-size: 20px;
-			font-weight: bold;
-		}
-		.total-container .checkout-btn {
-			display: inline-block;
-			padding: 10px 20px;
-			background-color: #36a2eb;
-			color: #fff;
-			border-radius: 5px;
-			text-decoration: none;
-			margin-top: 10px;
-		}
-		.total-container .checkout-btn:hover {
-			background-color: #2a91d0;
-		}
-	</style>
-
-
+	<link rel="stylesheet" href="../css/cart.css">
+	<title>Cart</title>
 </head>
 <body>
 
 	<section id="sidebar">
 		<a href="../admin/admin.php" class="brand"><i class='bx bxs-smile icon'></i> QuickShop</a>
 		<ul class="side-menu">
-			<li><a href="../views/shop.php"><i class='bx bxs-store icon'></i> Shop</a></li>
-			<li><a href="../views/cart.php" class="active"><i class='bx bxs-cart icon'></i> Orders</a></li>
-			<li><a href="../views/profile.php"><i class='bx bxs-user icon'></i> Profile</a></li>
+            <li><a href="../admin/dashboard.php" class="active"><i class='bx bxs-dashboard icon' ></i> Dashboard</a></li>
+			<li><a href="../admin/shop.php"><i class='bx bxs-store icon'></i> Shop</a></li>
+			<li><a href="../admin/cart.php" class="active"><i class='bx bxs-cart icon'></i> Cart</a></li>
+			<li><a href="../admin/profile.php"><i class='bx bxs-user icon'></i> Profile</a></li>
+			<li><a href="../admin/history.php"><i class='bx bx-history icon'></i> History</a></li>
+            <li><a href="../admin/manage_roles.php"><i class='bx bx-history icon' ></i>Manage Users</a></li>
+
 		</ul>
 		<div class="ads">
 			<div class="wrapper">
@@ -81,7 +38,7 @@ include_once "../actions/getuserDetails.php"
 				</div>
 			</form>
 			<div class="nav-right">
-			<?php echo getUserProfileImage() ?>
+				<img src="../path-to-your-image/image.png" alt="Profile Picture" class="profile-pic">
 			</div>
 		</nav>
 
@@ -124,10 +81,10 @@ include_once "../actions/getuserDetails.php"
 				</tbody>
 			</table>
 
-			<!-- <div class="total-container">
+			<div class="total-container">
 				<p class="total-price">Total: $85.00</p>
 				<a href="#" class="checkout-btn">Proceed to Checkout</a>
-			</div> -->
+			</div>
 		</main>
 	</section>
 

@@ -72,4 +72,3 @@ try {
 } catch (PDOException $e) {
     echo '<tr><td colspan="5">Error retrieving cart: ' . htmlspecialchars($e->getMessage()) . '</td></tr>';
 }
-?>

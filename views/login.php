@@ -50,7 +50,7 @@
                     <input type="password" placeholder="Password" name="password" />
                     <label></label>
                 </div>
-                <a href="../view/forgot_password.php?msg=Forgot your password?" class="forgot">Forgot your password?</a>
+                <a href="../views/forgot_password.php?msg=Forgot your password?" class="forgot">Forgot your password?</a>
                 <button>Sign In</button>
             </form>
         </div>

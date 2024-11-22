@@ -6,6 +6,8 @@ try {
     $stmt = $pdo->query("SELECT * FROM Products"); // Replace 'Products' with your table name if needed
     $products = $stmt->fetchAll(); // Fetch all products
 
+    echo '<div class="product-cards-container">'; // Start the container for the product cards
+
     if ($products) {
         foreach ($products as $product) {
             echo '
@@ -22,8 +24,9 @@ try {
     } else {
         echo "<p>No products available.</p>";
     }
+
+    echo '</div>'; // End the container
 } catch (PDOException $e) {
     // Handle any query errors
     echo "Error retrieving products: " . $e->getMessage();
 }
-?>
