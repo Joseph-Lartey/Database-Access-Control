@@ -104,6 +104,7 @@
 
         <main>
             <h1 class="title">Products</h1>
+            <a href="../login/logout.php" class="btn-upgrade">Logout</a>
             <button onclick="updateStock()">Update Stock</button>
             <table>
                 <thead>
