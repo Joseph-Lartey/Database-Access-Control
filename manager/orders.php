@@ -7,22 +7,83 @@
     <link rel="stylesheet" href="../css/dashboard.css">
     <title>View Orders</title>
     <style>
-		.nav-right {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+        /* Navigation profile picture styling */
+        .nav-right {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-.nav-right .profile-pic {
-    width: 40px; /* Adjust size as needed */
-    height: 40px;
-    border-radius: 50%; /* Makes it circular */
-    object-fit: cover;
-    cursor: pointer;
-}
+        .nav-right .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+        }
 
-	</style>
+        /* Styling for the table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table th, table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table thead th {
+            background-color: #f4f4f4;
+            color: #333;
+            font-weight: bold;
+        }
+
+        table tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Styling for buttons */
+        button {
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100px;
+            text-align: center;
+        }
+
+        button:hover {
+            background-color: #c0392b;
+        }
+
+        /* Main content styling */
+        main {
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .title {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
     <section id="sidebar">
@@ -40,26 +101,17 @@
     </section>
 
     <section id="content">
-
-		<nav>
-			<i class='bx bx-menu toggle-sidebar' ></i>
-			<form action="#">
-				<div class="form-group">
-					<input type="text" placeholder="Search...">
-					<i class='bx bx-search icon' ></i>
-				</div>
-			</form>
-			<!-- <a href="#" class="nav-link">
-				<i class='bx bxs-bell icon' ></i>
-				<span class="badge">5</span>
-			</a>
-			<a href="#" class="nav-link">
-				<i class='bx bxs-message-square-dots icon' ></i>
-				<span class="badge">8</span>
-			</a> -->
-			<div class="nav-right">
-				<img src="../images/12.jpg" alt="Profile Picture" class="profile-pic">
-			</div>
+        <nav>
+            <i class='bx bx-menu toggle-sidebar'></i>
+            <form action="#">
+                <div class="form-group">
+                    <input type="text" placeholder="Search...">
+                    <i class='bx bx-search icon'></i>
+                </div>
+            </form>
+            <div class="nav-right">
+                <img src="../images/12.jpg" alt="Profile Picture" class="profile-pic">
+            </div>
         </nav>
 
         <main>
@@ -75,12 +127,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Order records go here -->
+                    <!-- Sample Order records -->
                     <tr>
                         <td>1001</td>
                         <td>John Doe</td>
                         <td>$250.00</td>
                         <td>Completed</td>
+                        <td>
+                            <button onclick="viewDetails()">View Details</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1002</td>
+                        <td>Jane Smith</td>
+                        <td>$120.00</td>
+                        <td>Pending</td>
                         <td>
                             <button onclick="viewDetails()">View Details</button>
                         </td>
@@ -97,4 +158,3 @@
     </script>
 </body>
 </html>
-
