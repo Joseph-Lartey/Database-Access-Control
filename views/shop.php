@@ -1,3 +1,8 @@
+<?php
+include_once "../actions/getuserDetails.php"
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -106,9 +111,8 @@
 		<a href="../admin/admin.php" class="brand"><i class='bx bxs-smile icon'></i> QuickShop</a>
 		<ul class="side-menu">
 			<li><a href="../views/shop.php" class="active"><i class='bx bxs-store icon'></i> Shop</a></li>
-			<li><a href="../views/cart.php"><i class='bx bxs-cart icon'></i> Cart</a></li>
+			<li><a href="../views/cart.php"><i class='bx bxs-cart icon'></i> Orders</a></li>
 			<li><a href="../views/profile.php"><i class='bx bxs-user icon'></i> Profile</a></li>
-			<li><a href="../views/history.php"><i class='bx bx-history icon'></i> History</a></li>
 		</ul>
 		<div class="ads">
 			<div class="wrapper">
@@ -128,7 +132,7 @@
 				</div>
 			</form>
 			<div class="nav-right">
-				<img src="../path-to-your-image/image.png" alt="Profile Picture" class="profile-pic">
+                <?php echo getUserProfileImage() ?>
 			</div>
 		</nav>
 
@@ -189,6 +193,47 @@
     });
 
     </script>
+
+	<script>
+	function addToCart(button) {
+    const productID = button.getAttribute('data-product-id');
+    const productCard = button.closest('.product-card');
+    const quantityInput = productCard.querySelector('.quantity-input');
+    const quantity = quantityInput.value || 1;
+
+    if (!productID) {
+        alert("Error: Product ID is missing.");
+        return;
+    }
+    if (quantity <= 0) {
+        alert("Please enter a valid quantity.");
+        return;
+    }
+
+    console.log(`ProductID: ${productID}, Quantity: ${quantity}`);
+
+    fetch('../actions/add_to_cart.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `ProductID=${encodeURIComponent(productID)}&Quantity=${encodeURIComponent(quantity)}`
+    })
+        .then(response => response.text())
+        .then(data => {
+            alert(data); // Display success or error message
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("An error occurred while adding the product to the cart.");
+        });
+}
+
+
+
+
+
+	</script>
 
 </body>
 </html>

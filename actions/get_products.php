@@ -1,5 +1,5 @@
 <?php
-include "../settings/connection.php"; // Adjust the path to your connection.php
+include_once "../settings/connection.php"; // Adjust the path to your connection.php
 
 try {
     // Fetch products from the database
@@ -15,8 +15,9 @@ try {
                 <p>' . htmlspecialchars($product['Description']) . '</p>
                 <span class="price">$' . htmlspecialchars($product['Price']) . '</span>
                 <input type="number" class="quantity-input" placeholder="Qty" min="1" value="1">
-                <button class="buy-btn" data-product-id="' . htmlspecialchars($product['ProductID']) . '">Add to Cart</button>
+                <button class="buy-btn" onclick="addToCart(this)" data-product-id="' . htmlspecialchars($product['ProductID']) . '">Purchase</button>
             </div>';
+
         }
     } else {
         echo "<p>No products available.</p>";

@@ -1,5 +1,7 @@
 <?php
-session_start(); // Start session to access logged-in user's data
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+} // Start session to access logged-in user's data
 include "../settings/connection.php"; // Database connection
 
 // Ensure user is logged in
@@ -10,23 +12,20 @@ if (!isset($_SESSION['userID'])) {
 $userID = $_SESSION['userID'];
 
 try {
-    // Fetch the user's active (open) order
+    // Fetch the user's most recent order (active cart)
     $stmt = $pdo->prepare("
-        SELECT o.OrderID
+        SELECT o.OrderID, o.Date
         FROM Orders o
         WHERE o.UserID = :userID
-        AND NOT EXISTS (
-            SELECT 1
-            FROM OrderDetails od
-            WHERE od.OrderID = o.OrderID
-        )
+        ORDER BY o.Date DESC
         LIMIT 1
     ");
     $stmt->execute(['userID' => $userID]);
-    $order = $stmt->fetch();
+    $order = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($order) {
         $orderID = $order['OrderID'];
+        $orderDate = $order['Date'];
 
         // Fetch cart items
         $stmt = $pdo->prepare("
@@ -42,9 +41,8 @@ try {
             WHERE od.OrderID = :orderID
         ");
         $stmt->execute(['orderID' => $orderID]);
-        $cartItems = $stmt->fetchAll();
+        $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        // Generate table rows for cart items
         if ($cartItems) {
             $totalPrice = 0;
 
@@ -56,7 +54,7 @@ try {
                 echo '<td>$' . htmlspecialchars(number_format($item['Price'], 2)) . '</td>';
                 echo '<td>' . htmlspecialchars($item['Quantity']) . '</td>';
                 echo '<td>$' . htmlspecialchars(number_format($item['Total'], 2)) . '</td>';
-                echo '<td><span class="remove-btn" data-id="' . htmlspecialchars($item['ProductID']) . '">Remove</span></td>';
+                echo '<td>' . htmlspecialchars($orderDate) . '</td>'; // Display order date
                 echo '</tr>';
             }
 
@@ -66,7 +64,7 @@ try {
             echo '<td colspan="2" style="font-weight:bold;">$' . number_format($totalPrice, 2) . '</td>';
             echo '</tr>';
         } else {
-            echo '<tr><td colspan="5">Your cart is empty.</td></tr>';
+            echo '<tr><td colspan="5">Your purchase is empty.</td></tr>';
         }
     } else {
         echo '<tr><td colspan="5">No active orders found.</td></tr>';

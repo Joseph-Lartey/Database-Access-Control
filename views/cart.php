@@ -1,3 +1,8 @@
+<?php
+include_once "../actions/getuserDetails.php"
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +10,7 @@
 	<meta name="viewsport" content="width=device-width, initial-scale=1.0">
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<link rel="stylesheet" href="../css/dashboard.css">
-	<title>Cart</title>
+	<title>orders</title>
 	<style>
 		.cart-table {
 			width: 100%;
@@ -53,9 +58,8 @@
 		<a href="../admin/admin.php" class="brand"><i class='bx bxs-smile icon'></i> QuickShop</a>
 		<ul class="side-menu">
 			<li><a href="../views/shop.php"><i class='bx bxs-store icon'></i> Shop</a></li>
-			<li><a href="../views/cart.php" class="active"><i class='bx bxs-cart icon'></i> Cart</a></li>
+			<li><a href="../views/cart.php" class="active"><i class='bx bxs-cart icon'></i> Orders</a></li>
 			<li><a href="../views/profile.php"><i class='bx bxs-user icon'></i> Profile</a></li>
-			<li><a href="../views/history.php"><i class='bx bx-history icon'></i> History</a></li>
 		</ul>
 		<div class="ads">
 			<div class="wrapper">
@@ -75,7 +79,7 @@
 				</div>
 			</form>
 			<div class="nav-right">
-				<img src="../path-to-your-image/image.png" alt="Profile Picture" class="profile-pic">
+			<?php echo getUserProfileImage() ?>
 			</div>
 		</nav>
 
@@ -118,10 +122,10 @@
 				</tbody>
 			</table>
 
-			<div class="total-container">
+			<!-- <div class="total-container">
 				<p class="total-price">Total: $85.00</p>
 				<a href="#" class="checkout-btn">Proceed to Checkout</a>
-			</div>
+			</div> -->
 		</main>
 	</section>
 
