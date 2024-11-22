@@ -51,8 +51,6 @@ include_once "../actions/getuserDetails.php"
 			background-color: #2a91d0;
 		}
 	</style>
-
-
 </head>
 <body>
 

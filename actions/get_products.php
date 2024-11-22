@@ -6,7 +6,6 @@ try {
     $stmt = $pdo->query("SELECT * FROM Products"); // Replace 'Products' with your table name if needed
     $products = $stmt->fetchAll(); // Fetch all products
 
-    echo '<div class="product-cards-container">'; // Start the container for the product cards
 
     if ($products) {
         foreach ($products as $product) {
