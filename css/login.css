@@ -8,7 +8,7 @@
 }
 
 :root {
-    --linear-grad: linear-gradient(to right, #923D41, #520004);
+    --linear-grad: linear-gradient(to right, #923D41, #622c2e);
     --grad-clr1: #000000;
     --grad-clr2: #243B55;
 }
@@ -31,8 +31,8 @@ body {
     width: 850px;
     height: 500px;
     background: linear-gradient(to bottom, #e3e3e3, #e3e3e3);
-    box-shadow: 25px 30px 55px #5557;
-    border-radius: 13px;
+    box-shadow: 25px 30px 55px rgba(80, 80, 80, 0.7);
+    border-radius: 10px;
     z-index: 1;
 }
 
@@ -133,7 +133,7 @@ a.forgot {
 button {
     border-radius: 5px;
     border: 0px;
-    background: linear-gradient(to right, #ffffff, #888888);
+    background: linear-gradient(to right, #ffffff, #bebebe);
     color: #000000;
     font-size: 12px;
     font-weight: bold;
@@ -164,6 +164,7 @@ button {
     overflow: hidden;
     transition: transform 0.6s ease-in-out;
     z-index: 9;
+    border-radius: 10px;
 }
 
 #overlayBtn {

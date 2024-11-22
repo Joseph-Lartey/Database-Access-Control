@@ -24,4 +24,3 @@ try {
     // Handle any errors
     echo "Error deleting product: " . $e->getMessage();
 }
-?>

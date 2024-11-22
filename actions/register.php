@@ -33,7 +33,7 @@ if (isset($_GET['msg']) && $_GET['msg'] == "registering") {
         if ($stmt->execute()) {
             $message = "Successfully registered";
             $encodedMessage = urlencode($message);
-            header("Location: ../views/cart.php?email=" . urlencode($email) . "&msg=" . $encodedMessage);
+            header("Location: ../views/shop.php?email=" . urlencode($email) . "&msg=" . $encodedMessage);
             exit();
         } else {
             header("Location: ../views/login.php?msg=Failed to register.");
@@ -75,13 +75,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: ../views/login.php?msg=Please enter a valid email address.");
         exit();
     }
-    
+
     // Check if passwords match
     if ($password !== $confirmPassword) {
         header("Location: ../views/login.php?msg=Passwords do not match.");
         exit();
     }
-    
+
     // Validate password strength
     $passwordRegex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/';
     if (!preg_match($passwordRegex, $password)) {
@@ -123,21 +123,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Function to send OTP via email using PHPMailer
-function sendOTP($email, $OTP) {
+function sendOTP($email, $OTP)
+{
     $mail = new PHPMailer(true);
 
     try {
         // Server settings
-        $mail->isSMTP();                                        
-        $mail->Host = 'smtp.gmail.com';                         
-        $mail->SMTPAuth   = true;                               
-        $mail->Username   = 'kobekootinsanwu@gmail.com';        
-        $mail->Password   = 'jmvi iiki ugus zqnm';              
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;     
-        $mail->Port       = 587;                                
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'kobekootinsanwu@gmail.com';
+        $mail->Password   = 'jmvi iiki ugus zqnm';
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = 587;
 
         // Recipients
-        $mail->setFrom('kobekootinsanwu@gmail.com', 'Database Access Control'); 
+        $mail->setFrom('kobekootinsanwu@gmail.com', 'Database Access Control');
         $mail->addAddress($email);
 
         // Content

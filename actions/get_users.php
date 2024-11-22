@@ -37,4 +37,3 @@ try {
     // Handle any query errors
     echo "Error retrieving users: " . $e->getMessage();
 }
-?>

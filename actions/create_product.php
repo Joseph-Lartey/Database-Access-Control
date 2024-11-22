@@ -48,4 +48,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: ../admin/create_product.php");
     exit();
 }
-?>

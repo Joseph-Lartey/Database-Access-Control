@@ -12,6 +12,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $signingIn = $_SESSION['signingIn'];
     $registering = $_SESSION['registering'];
 
+    if (isset($signingIn)) {
+        unset($registering);
+    }
+
+    if (isset($registering)) {
+        echo $registering;
+        header("Location: ../actions/register.php?msg=registering");
+        exit();
+    }
+
     // Assuming the user ID is stored in the session after login
     $userID = $_SESSION['userID']; // Replace with your session key for user ID
 
@@ -36,12 +46,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $message_1 = $_POST['message'] ?? '';
     $message_1 = trim((string)$_POST['message']);
     $registering = trim((string)$_SESSION['registering']);
-    
+
     $currentTime = time();
 
     $userOTP = (string) $userOTP;
     $expectedOTP = (string) $_SESSION['OTP'];
-    
+
     $OTP_time_created = $_SESSION['OTP_timestamp'];
     $overdueOTP = $currentTime - $OTP_time_created;
 
@@ -53,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Check if the user input OTP matches the expected OTP and the message is "Forgot Password"
     if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password' && $signingIn === 'signingIn' && $role === 'Administrator') {
         unset($_SESSION['OTP']);
-        header("Location: ../views/admin.php?msg=" . urlencode($message_1));
+        header("Location: ../admin/dashboard.php?msg=" . urlencode($message_1));
         exit();
     }
 
@@ -62,22 +72,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         unset($_SESSION['OTP']);
         header("Location: ../views/sales.php?msg=" . urlencode($message_1));
         exit();
-    }
-
-    else if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password' && $signingIn === 'signingIn' && $role === 'Inventory Manager') {
+    } else if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password' && $signingIn === 'signingIn' && $role === 'Inventory Manager') {
         unset($_SESSION['OTP']);
         header("Location: ../views/invent.php?msg=" . urlencode($message_1));
         exit();
-    }
-
-    else if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password' && $signingIn === 'signingIn' && $role === 'Customer') {
+    } else if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password' && $signingIn === 'signingIn' && $role === 'Customer') {
         unset($_SESSION['OTP']);
         header("Location: ../views/shop.php?msg=" . urlencode($message_1));
         exit();
     }
 
     // Case for registering process
-    else if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password '&& $registering === 'registering'){
+    else if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password ' && $registering === 'registering') {
         unset($_SESSION['OTP']);
         header("Location: ../views/home.php?msg=" . urlencode($message_1));
         exit();
@@ -102,21 +108,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         unset($_SESSION['OTP']);
         header("Location: ../admin/dashboard.php?msg=OTP verified successfully.");
         exit();
-    }
-
-    else if ($userOTP === $expectedOTP && $role === 'Sales Personnel') {
+    } else if ($userOTP === $expectedOTP && $role === 'Sales Personnel') {
         unset($_SESSION['OTP']);
         header("Location: ../views/sales.php?msg=OTP verified successfully.");
         exit();
-    }
-
-    else if ($userOTP === $expectedOTP && $role === 'Inventory Manager') {
+    } else if ($userOTP === $expectedOTP && $role === 'Inventory Manager') {
         unset($_SESSION['OTP']);
         header("Location: ../views/invent.php?msg=OTP verified successfully.");
         exit();
-    }
-
-    else if ($userOTP === $expectedOTP && $role === 'Customer') {
+    } else if ($userOTP === $expectedOTP && $role === 'Customer') {
         unset($_SESSION['OTP']);
         header("Location: ../views/cart.php?msg=OTP verified successfully.");
         exit();
@@ -126,5 +126,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header("Location: ../views/verify_otp.php?msg=Incorrect OTP. Please try again.");
     exit();
 }
-
-?>
