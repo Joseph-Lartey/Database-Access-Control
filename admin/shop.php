@@ -12,13 +12,11 @@
 	<section id="sidebar">
 		<a href="../admin/admin.php" class="brand"><i class='bx bxs-smile icon'></i> QuickShop</a>
 		<ul class="side-menu">
-            <li><a href="../admin/dashboard.php" class="active"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
-			<li><a href="../admin/shop.php" class="active"><i class='bx bxs-store icon'></i> Shop</a></li>
-			<li><a href="../admin/cart.php"><i class='bx bxs-cart icon'></i> Cart</a></li>
-			<li><a href="../admin/profile.php"><i class='bx bxs-user icon'></i> Profile</a></li>
-			<li><a href="../admin/history.php"><i class='bx bx-history icon'></i> History</a></li>
-            <li><a href="../admin/manage_role.php"><i class='bx bx-history icon' ></i>Manage Users</a></li>
-
+			<li><a href="../admin/dashboard.php"><i class='bx bxs-dashboard icon' ></i> Dashboard</a></li>
+			<li><a href="../admin/shop.php" class="active"><i class='bx bxs-store icon' ></i> Shop</a></li>
+			<li><a href="../admin/profile.php"><i class='bx bxs-user icon' ></i> Profile</a></li>
+			<li><a href="../admin/role.php"><i class='bx bx-history icon' ></i>Roles</a></li>
+			<li><a href="../admin/orders.php"><i class='bx bx-store icon' ></i>Orders</a></li>
 		</ul>
 		<div class="ads">
 			<div class="wrapper">
@@ -51,12 +49,12 @@
 			</ul>
 
             <div class="create-product-container">
-                <button id="createItemButton">CREATE ITEM</button>
+                <button class = "create-product-container" id="createItemButton">CREATE ITEM</button>
             </div>
 
 			<div class="shop-grid">
                 <?php
-                include "../actions/get_products.php"
+                include "../actions/get_admin_products.php"
                 ?>
 			</div>
 		</main>

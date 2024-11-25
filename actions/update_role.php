@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute();
 
             // Redirect back to the admin user management page
-            header("Location: ../admin/manage_role.php?success=1");
+            header("Location: ../admin/role.php?success=1");
             exit();
         } catch (PDOException $e) {
             echo "Error updating user role: " . $e->getMessage();

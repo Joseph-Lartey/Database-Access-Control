@@ -9,7 +9,7 @@ include_once "../actions/getuserDetails.php"
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-	<link rel="stylesheet" href="../css/shop.css">
+	<link rel="stylesheet" href="../css/dashboard.css">
 	<title>Shop</title>
     <style>
 		.shop-grid {
@@ -147,34 +147,7 @@ include_once "../actions/getuserDetails.php"
 			<div class="shop-grid">
                 <?php
                 include "../actions/get_products.php"
-
                 ?>
-				<!-- Product Card Example -->
-                <!-- <div class="product-card">
-                    <img src="../images/12.jpg" alt="Product 1">
-                    <h3>Product Name 1</h3>
-                    <p>Short description of the product.</p>
-                    <span class="price">$25.00</span>
-                    <input type="number" class="quantity-input" placeholder="Qty" min="1" value="1">
-                    <button class="buy-btn">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <img src="../images/12.jpg" alt="Product 1">
-                    <h3>Product Name 1</h3>
-                    <p>Short description of the product.</p>
-                    <span class="price">$25.00</span>
-                    <input type="number" class="quantity-input" placeholder="Qty" min="1" value="1">
-                    <button class="buy-btn">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <img src="../images/12.jpg" alt="Product 1">
-                    <h3>Product Name 1</h3>
-                    <p>Short description of the product.</p>
-                    <span class="price">$25.00</span>
-                    <input type="number" class="quantity-input" placeholder="Qty" min="1" value="1">
-                    <button class="buy-btn">Add to Cart</button>
-                </div> -->
-				<!-- Add more products as needed -->
 			</div>
 		</main>
 	</section>
