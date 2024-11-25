@@ -1,15 +1,18 @@
 -- Step 1: Create the database
-CREATE DATABASE QuickShop;
+DROP DATABASE IF EXISTS quickshop;
+CREATE DATABASE quickshop;
 USE QuickShop;
 
 -- Step 2: Create tables
 -- Users table
 CREATE TABLE Users (
-    UserID INT AUTO_INCREMENT PRIMARY KEY,
-    Name VARCHAR(100) NOT NULL,
-    Email VARCHAR(150) UNIQUE NOT NULL,
-    Password VARCHAR(255) NOT NULL, -- Hashed passwords recommended
-    Role ENUM('Administrator', 'Sales Personnel', 'Inventory Manager', 'Customer') NOT NULL
+    userID INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(150) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL, -- Hashed passwords recommended
+    role ENUM('Administrator', 'Sales Personnel', 'Inventory Manager', 'Customer') NOT NULL,
+    ProfileImage VARCHAR(255)
 );
 
 -- Products table
@@ -18,7 +21,8 @@ CREATE TABLE Products (
     Name VARCHAR(150) NOT NULL,
     Description TEXT,
     Price DECIMAL(10, 2) NOT NULL,
-    StockQuantity INT NOT NULL
+    StockQuantity INT NOT NULL,
+    ProductImage VARCHAR(255) -- URL or file path to the product image
 );
 
 -- Orders table
@@ -27,6 +31,7 @@ CREATE TABLE Orders (
     Date DATETIME DEFAULT CURRENT_TIMESTAMP,
     UserID INT NOT NULL,
     TotalAmount DECIMAL(10, 2) NOT NULL,
+    Status ENUM('Processed', 'Unprocessed') DEFAULT 'Unprocessed', 
     FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE
 );
 
@@ -40,3 +45,4 @@ CREATE TABLE OrderDetails (
     FOREIGN KEY (OrderID) REFERENCES Orders(OrderID) ON DELETE CASCADE,
     FOREIGN KEY (ProductID) REFERENCES Products(ProductID) ON DELETE CASCADE
 );
+

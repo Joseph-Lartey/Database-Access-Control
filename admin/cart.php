@@ -2,65 +2,27 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewsport" content="width=device-width, initial-scale=1.0">
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-	<link rel="stylesheet" href="../css/dashboard.css">
+	<link rel="stylesheet" href="../css/cart.css">
 	<title>Cart</title>
-	<style>
-		.cart-table {
-			width: 100%;
-			border-collapse: collapse;
-			margin: 20px 0;
-		}
-		.cart-table th, .cart-table td {
-			padding: 15px;
-			text-align: left;
-			border-bottom: 1px solid #ddd;
-		}
-		.cart-table th {
-			background-color: #f4f4f4;
-			font-weight: bold;
-		}
-		.cart-table .remove-btn {
-			color: #ff5252;
-			cursor: pointer;
-		}
-		.total-container {
-			text-align: right;
-			padding: 20px;
-		}
-		.total-container .total-price {
-			font-size: 20px;
-			font-weight: bold;
-		}
-		.total-container .checkout-btn {
-			display: inline-block;
-			padding: 10px 20px;
-			background-color: #36a2eb;
-			color: #fff;
-			border-radius: 5px;
-			text-decoration: none;
-			margin-top: 10px;
-		}
-		.total-container .checkout-btn:hover {
-			background-color: #2a91d0;
-		}
-	</style>
 </head>
 <body>
 
 	<section id="sidebar">
 		<a href="../admin/admin.php" class="brand"><i class='bx bxs-smile icon'></i> QuickShop</a>
 		<ul class="side-menu">
-			<li><a href="../view/dashboard.php"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
-			<li><a href="../view/shop.php"><i class='bx bxs-store icon'></i> Shop</a></li>
-			<li><a href="../view/cart.php" class="active"><i class='bx bxs-cart icon'></i> Cart</a></li>
-			<li><a href="../view/profile.php"><i class='bx bxs-user icon'></i> Profile</a></li>
+            <li><a href="../admin/dashboard.php" class="active"><i class='bx bxs-dashboard icon' ></i> Dashboard</a></li>
+			<li><a href="../admin/shop.php"><i class='bx bxs-store icon'></i> Shop</a></li>
+			<li><a href="../admin/cart.php" class="active"><i class='bx bxs-cart icon'></i> Cart</a></li>
+			<li><a href="../admin/profile.php"><i class='bx bxs-user icon'></i> Profile</a></li>
 			<li><a href="../admin/history.php"><i class='bx bx-history icon'></i> History</a></li>
+            <li><a href="../admin/manage_roles.php"><i class='bx bx-history icon' ></i>Manage Users</a></li>
+
 		</ul>
 		<div class="ads">
 			<div class="wrapper">
-				<a href="../login/logout.php" class="btn-upgrade">Logout</a>
+				<a href="../views/logout.php" class="btn-upgrade">Logout</a>
 			</div>
 		</div>
 	</section>
@@ -99,7 +61,10 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
+                    <?php include "../actions/get_cart.php"; ?>
+
+
+					<!-- <tr>
 						<td>Product Name 1</td>
 						<td>$25.00</td>
 						<td>2</td>
@@ -112,8 +77,7 @@
 						<td>1</td>
 						<td>$35.00</td>
 						<td><span class="remove-btn">Remove</span></td>
-					</tr>
-					<!-- Add more cart items as needed -->
+					</tr> -->
 				</tbody>
 			</table>
 

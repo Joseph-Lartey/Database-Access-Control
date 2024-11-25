@@ -7,40 +7,25 @@
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<link rel="stylesheet" href="../css/dashboard.css">
 	<title>Dashboard</title>
-	<style>
-		.nav-right {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.nav-right .profile-pic {
-    width: 40px; /* Adjust size as needed */
-    height: 40px;
-    border-radius: 50%; /* Makes it circular */
-    object-fit: cover;
-    cursor: pointer;
-}
-
-	</style>
 </head>
 <body>
 
 	<section id="sidebar">
 		<a href="../admin/admin.php" class="brand"><i class='bx bxs-smile icon'></i> QuickShop</a>
 		<ul class="side-menu">
-			<li><a href="../view/dashboard.php" class="active"><i class='bx bxs-dashboard icon' ></i> Dashboard</a></li>
-			<li><a href="../view/shop.php"><i class='bx bxs-store icon' ></i> Shop</a></li>
-			<li><a href="../view/cart.php"><i class='bx bxs-cart icon' ></i> cart</a></li>
-			<li><a href="../view/profile.php"><i class='bx bxs-user icon' ></i> Profile</a></li>
+			<li><a href="../admin/dashboard.php" class="active"><i class='bx bxs-dashboard icon' ></i> Dashboard</a></li>
+			<li><a href="../admin/shop.php"><i class='bx bxs-store icon' ></i> Shop</a></li>
+			<li><a href="../admin/cart.php"><i class='bx bxs-cart icon' ></i> Cart</a></li>
+			<li><a href="../admin/profile.php"><i class='bx bxs-user icon' ></i> Profile</a></li>
 			<li><a href="../admin/history.php"><i class='bx bx-history icon' ></i>History</a></li>
+			<li><a href="../admin/manage_role.php"><i class='bx bx-history icon' ></i>History</a></li>
 
 
 		</ul>
 		<div class="ads">
 			<div class="wrapper">
-				<a href="../login/logout.php" class="btn-upgrade">Logout</a>
+				<a href="../views/logout.php" class="btn-upgrade">Logout</a>
 			</div>
 		</div>
 	</section>
@@ -55,14 +40,14 @@
 					<i class='bx bx-search icon' ></i>
 				</div>
 			</form>
-			<!-- <a href="#" class="nav-link">
+			<a href="#" class="nav-link">
 				<i class='bx bxs-bell icon' ></i>
 				<span class="badge">5</span>
 			</a>
 			<a href="#" class="nav-link">
 				<i class='bx bxs-message-square-dots icon' ></i>
 				<span class="badge">8</span>
-			</a> -->
+			</a>
 			<div class="nav-right">
 				<img src="../images/12.jpg" alt="Profile Picture" class="profile-pic">
 			</div>

@@ -1,0 +1,99 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Form Container */
+.container-15 {
+    background-color: #ffffff;
+    width: 400px;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+/* Form Header */
+.container-16 .close-form-group {
+    text-align: right;
+}
+
+#closePopup {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    color: #ff4d4f;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#closePopup:hover {
+    color: #d9363e;
+}
+
+/* Form Group */
+.form-group label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333333;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="date"]:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+/* Submit Button */
+.submit button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4a90e2;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit button:hover {
+    background-color: #357ab7;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .container-15 {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="date"] {
+        font-size: 13px;
+    }
+
+    .submit button {
+        font-size: 14px;
+    }
+}

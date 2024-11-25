@@ -1,4 +1,5 @@
 <?php
+
 // Database connection parameters
 $host = 'localhost';        
 $dbname = 'quickshop';      
