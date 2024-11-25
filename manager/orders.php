@@ -1,3 +1,29 @@
+<?php
+include '../settings/connection.php';
+
+// Fetch detailed orders data
+$query = $pdo->prepare("
+    SELECT 
+        od.OrderDetailID, -- Unique identifier for each item in an order
+        u.Name AS CustomerName, -- Replace with actual column name for the user's full name
+        u.Email AS Email, -- Replace with the actual column name for email
+        p.Name AS ItemName, -- Replace with the actual column name for product name
+        od.Quantity AS Quantity,
+        (od.Quantity * od.Price) AS Subtotal,
+        o.Date AS OrderDate
+    FROM Orders o
+    JOIN Users u ON o.UserID = u.UserID
+    JOIN OrderDetails od ON o.OrderID = od.OrderID
+    JOIN Products p ON od.ProductID = p.ProductID
+    ORDER BY o.Date
+");
+if (!$query->execute()) {
+    die("Query failed: " . implode(", ", $query->errorInfo()));
+}
+
+$orders = $query->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +33,7 @@
     <link rel="stylesheet" href="../css/dashboard.css">
     <title>View Orders</title>
     <style>
+        /* Styling for table and buttons */
         /* Navigation profile picture styling */
         .nav-right {
             margin-left: auto;
@@ -119,42 +146,30 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Order ID</th>
+                        <th>Order Detail ID</th>
                         <th>Customer Name</th>
-                        <th>Total Price</th>
-                        <th>Status</th>
-                        <th>Order Details</th>
+                        <th>Email</th>
+                        <th>Item Purchased</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                        <th>Order Date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Sample Order records -->
-                    <tr>
-                        <td>1001</td>
-                        <td>John Doe</td>
-                        <td>$250.00</td>
-                        <td>Completed</td>
-                        <td>
-                            <button onclick="viewDetails()">View Details</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1002</td>
-                        <td>Jane Smith</td>
-                        <td>$120.00</td>
-                        <td>Pending</td>
-                        <td>
-                            <button onclick="viewDetails()">View Details</button>
-                        </td>
-                    </tr>
+                    <?php foreach ($orders as $order): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($order['OrderDetailID']) ?></td>
+                            <td><?= htmlspecialchars($order['CustomerName']) ?></td>
+                            <td><?= htmlspecialchars($order['Email']) ?></td>
+                            <td><?= htmlspecialchars($order['ItemName']) ?></td>
+                            <td><?= htmlspecialchars($order['Quantity']) ?></td>
+                            <td><?= htmlspecialchars($order['Subtotal']) ?></td>
+                            <td><?= htmlspecialchars($order['OrderDate']) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </main>
     </section>
-
-    <script>
-        function viewDetails() {
-            alert("Order details view triggered.");
-        }
-    </script>
 </body>
 </html>
