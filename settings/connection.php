@@ -3,8 +3,8 @@
 // Database connection parameters
 $host = 'localhost';        
 $dbname = 'quickshop';      
-$username = 'root';         
-$password = '';             
+$username = 'dela';         
+$password = 'root';             
 
 try {
     // Establish a connection to the database
