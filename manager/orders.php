@@ -1,5 +1,8 @@
 <?php
 include '../settings/connection.php';
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+} 
 
 // Fetch detailed orders data
 $query = $pdo->prepare("
