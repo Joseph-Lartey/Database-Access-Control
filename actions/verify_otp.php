@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     } else if ($userOTP === $expectedOTP && $role === 'Sales Personnel') {
         unset($_SESSION['OTP']);
-        header("Location: ../views/sales.php?msg=OTP verified successfully.");
+        header("Location: ../sales/SalesOrders.php?msg=OTP verified successfully.");
         exit();
     } else if ($userOTP === $expectedOTP && $role === 'Inventory Manager') {
         unset($_SESSION['OTP']);

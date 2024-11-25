@@ -54,7 +54,7 @@ function getUserProfileImage() {
         if ($profileImage) {
             return '<img src="../uploads/' . htmlspecialchars($profileImage) . '" alt="Profile Picture" class="profile-pic">';
         } else {
-            return '<img src="../images/12.jpg" alt="Default Profile Picture" class="profile-pic"';
+            return '<img src="../images/12.jpg" alt="Default Profile Picture" class="profile-pic">';
         }
     } catch (PDOException $e) {
         return '<p>Error fetching profile image: ' . htmlspecialchars($e->getMessage()) . '</p>';

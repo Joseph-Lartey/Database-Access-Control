@@ -31,6 +31,7 @@ CREATE TABLE Orders (
     Date DATETIME DEFAULT CURRENT_TIMESTAMP,
     UserID INT NOT NULL,
     TotalAmount DECIMAL(10, 2) NOT NULL,
+    Status ENUM('Processed', 'Unprocessed') DEFAULT 'Unprocessed', 
     FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE
 );
 

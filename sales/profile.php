@@ -14,15 +14,19 @@ include_once "../actions/getuserDetails.php"
 
 	<title>Profile</title>
 
+    <style>
+        
+    </style>
+
 </head>
 <body>
 
 	<section id="sidebar">
-		<a href="../admin/admin.php" class="brand"><i class='bx bxs-smile icon'></i> QuickShop</a>
-		<ul class="side-menu">
-			<li><a href="../views/shop.php"><i class='bx bxs-store icon'></i> Shop</a></li>
-			<li><a href="../views/cart.php"><i class='bx bxs-cart icon'></i> Orders</a></li>
-			<li><a href="../views/profile.php" class="active"><i class='bx bxs-user icon'></i> Profile</a></li>
+        <a href="../sales/SalesOrders.php" class="brand"><i class='bx bxs-smile icon'></i> QuickShop</a>
+        <ul class="side-menu">
+            <li><a href="../sales/SalesOrders.php" ><i class='bx bxs-cart icon'></i> Orders</a></li>
+			<li><a href="../sales/Products.php"><i class='bx bxs-store icon'></i> Products</a></li>
+            <li><a href="../sales/profile.php" class="active"><i class='bx bxs-user icon'></i> Profile</a></li>
 		</ul>
 		<div class="ads">
 			<div class="wrapper">
@@ -51,8 +55,10 @@ include_once "../actions/getuserDetails.php"
 			<ul class="breadcrumbs">
 				<li><a href="#">Add news</a></li>
 				<li class="divider">/</li>
-				<li><a href="#" class="active">Dashboard</a></li>
+				<li><a href="#" class="active">Profile</a></li>
 			</ul>
+
+
 
             <div class="outer-profile">
                 <div class="profile-image">
@@ -79,6 +85,28 @@ include_once "../actions/getuserDetails.php"
                     </div>
                 </div>
             </div>
+
+			<!-- <div class="outer-profile">
+                <div id="profile-page">
+                    <div class="profile-info">
+                        <div class="profile-image-container">
+                            <?php echo getUserProfileImage() ?>
+                        </div>
+                        <div>
+                                <p><strong>Name:</strong> John Doe</p>
+                                <p><strong>Email:</strong> johndoe@example.com</p>
+                                <p><strong>Date of Birth:</strong> January 1, 1990</p>
+                                <p><strong>Phone Number:</strong> 059977320</p>
+                        </div>
+                    </div>
+                    <div class="profile-actions">
+                        <button class="Edit" id="Edit">Edit Username</button>
+                        <button class="Editemail" id="Editemail">Change Email</button>
+                        <button class="ChangePassword" id="ChangePassword">Change Password</button>
+                        <button class="AddImage" id="AddImage">Add Image</button>
+                    </div>
+                </div>
+            </div> -->
 
             <!-- Modals -->
             <div id="editUsernameModal" class="modal">
@@ -185,3 +213,5 @@ include_once "../actions/getuserDetails.php"
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </body>
 </html>
+
+

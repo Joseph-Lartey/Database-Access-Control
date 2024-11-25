@@ -34,19 +34,19 @@ try {
     // Debugging
     error_log("Product found: " . json_encode($product));
 
-    // Check for an open order
+    // Check for an open order with status 'Unprocessed'
     $stmt = $pdo->prepare("
         SELECT OrderID 
         FROM Orders 
-        WHERE UserID = :userID 
+        WHERE UserID = :userID AND Status = 'Unprocessed'
         LIMIT 1
     ");
     $stmt->execute(['userID' => $userID]);
     $order = $stmt->fetch();
 
     if (!$order) {
-        // Create a new order
-        $stmt = $pdo->prepare("INSERT INTO Orders (UserID, TotalAmount) VALUES (:userID, 0)");
+        // Create a new order with status 'Unprocessed'
+        $stmt = $pdo->prepare("INSERT INTO Orders (UserID, TotalAmount, Status) VALUES (:userID, 0, 'Unprocessed')");
         $stmt->execute(['userID' => $userID]);
         $orderID = $pdo->lastInsertId();
     } else {
@@ -94,7 +94,7 @@ try {
     $stmt = $pdo->prepare("UPDATE Products SET StockQuantity = StockQuantity - :quantity WHERE ProductID = :productID");
     $stmt->execute(['quantity' => $quantity, 'productID' => $productID]);
 
-    echo "You've purchased the product succesfully!";
+    echo "Item added to cart successfully!";
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
