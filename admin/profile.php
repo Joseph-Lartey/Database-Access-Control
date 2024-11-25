@@ -1,3 +1,8 @@
+
+<?php
+include_once "../actions/getuserDetails.php"
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,9 +18,8 @@
 <body>
 
 	<section id="sidebar">
-		<a href="../admin/admin.php" class="brand"><i class='bx bxs-smile icon'></i> QuickShop</a>
+		<a href="../admin/shop.php" class="brand"><i class='bx bxs-smile icon'></i> QuickShop</a>
 		<ul class="side-menu">
-            <li><a href="../admin/dashboard.php"><i class='bx bxs-dashboard icon' ></i> Dashboard</a></li>
 			<li><a href="../admin/shop.php"><i class='bx bxs-store icon' ></i> Shop</a></li>
 			<li><a href="../admin/profile.php" class="active"><i class='bx bxs-user icon' ></i> Profile</a></li>
 			<li><a href="../admin/role.php"><i class='bx bx-history icon' ></i>Roles</a></li>
@@ -38,7 +42,7 @@
 				</div>
 			</form>
 			<div class="nav-right">
-				<img src="../path-to-your-image/image.png" alt="Profile Picture" class="profile-pic">
+            <?php echo getUserProfileImage() ?>
 			</div>
 		</nav>
 	
@@ -50,24 +54,28 @@
 				<li><a href="#" class="active">Dashboard</a></li>
 			</ul>
 
-			<div class="outer-profile">
-                <div id="profile-page">
-                    <div class="profile-info">
-                        <div class="profile-image-container">
-                            <img src="../images/12.jpg" alt="Profile Picture" class="profile-image">
-                        </div>
-                        <div class="user-details">
-                            <p><strong>Name:</strong> John Doe</p>
-                            <p><strong>Email:</strong> johndoe@example.com</p>
-                            <p><strong>Date of Birth:</strong> January 1, 1990</p>
-                            <p><strong>Phone Number:</strong> 059977320</p>
-                        </div>
-                    </div>
+            <div class="outer-profile">
+                <div class="profile-image">
+                    <!-- <img src="../images/12.jpg" alt="Default Profile Picture" class="profile-pic"> -->
+                    <?php echo getUserProfileImage() ?>
+                </div>
+                <div class="user-details">
+                <?php
+                    echo getUserProfileDetails() ;
+                ?>
+                    <!-- <p><strong>Name:</strong> John Doe</p>
+                    <p><strong>Email:</strong> johndoe@example.com</p>
+                    <p><strong>Date of Birth:</strong> January 1, 1990</p>
+                    <p><strong>Phone Number:</strong> 059977320</p> -->
+
+                    
                     <div class="profile-actions">
-                        <button class="Edit" id="Edit">Edit Username</button>
-                        <button class="Editemail" id="Editemail">Change Email</button>
-                        <button class="ChangePassword" id="ChangePassword">Change Password</button>
-                        <button class="AddImage" id="AddImage">Add Image</button>
+                        <div class="actions">
+                            <button class="Edit" id="Edit">Edit Username</button>
+                            <button class="Editemail" id="Editemail">Change Email</button>
+                            <button class="ChangePassword" id="ChangePassword">Change Password</button>
+                            <button class="AddImage" id="AddImage">Add Image</button>
+                        </div>
                     </div>
                 </div>
             </div>

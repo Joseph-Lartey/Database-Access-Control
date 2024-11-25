@@ -10,9 +10,8 @@
 <body>
 
 	<section id="sidebar">
-		<a href="../admin/admin.php" class="brand"><i class='bx bxs-smile icon'></i> QuickShop</a>
+		<a href="../admin/shop.php" class="brand"><i class='bx bxs-smile icon'></i> QuickShop</a>
 		<ul class="side-menu">
-			<li><a href="../admin/dashboard.php"><i class='bx bxs-dashboard icon' ></i> Dashboard</a></li>
 			<li><a href="../admin/shop.php" class="active"><i class='bx bxs-store icon' ></i> Shop</a></li>
 			<li><a href="../admin/profile.php"><i class='bx bxs-user icon' ></i> Profile</a></li>
 			<li><a href="../admin/role.php"><i class='bx bx-history icon' ></i>Roles</a></li>
