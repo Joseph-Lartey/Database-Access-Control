@@ -48,10 +48,6 @@
 				<li><a href="#" class="active">Shop</a></li>
 			</ul>
 
-            <div class="create-product-container">
-                <button id="createItemButton">CREATE ITEM</button>
-            </div>
-
 			<div class="shop-grid">
                 <?php
                 include "../actions/get_users.php"
