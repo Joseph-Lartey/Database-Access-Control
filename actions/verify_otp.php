@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     } else if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password' && $signingIn === 'signingIn' && $role === 'Inventory Manager') {
         unset($_SESSION['OTP']);
-        header("Location: ../views/invent.php?msg=" . urlencode($message_1));
+        header("Location: ../manager/products.php?msg=" . urlencode($message_1));
         exit();
     } else if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password' && $signingIn === 'signingIn' && $role === 'Customer') {
         unset($_SESSION['OTP']);
@@ -114,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     } else if ($userOTP === $expectedOTP && $role === 'Inventory Manager') {
         unset($_SESSION['OTP']);
-        header("Location: ../views/invent.php?msg=OTP verified successfully.");
+        header("Location: ../manager/products.php?msg=OTP verified successfully.");
         exit();
     } else if ($userOTP === $expectedOTP && $role === 'Customer') {
         unset($_SESSION['OTP']);
