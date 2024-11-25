@@ -40,6 +40,7 @@ CREATE TABLE OrderDetails (
     ProductID INT NOT NULL,
     Quantity INT NOT NULL,
     Price DECIMAL(10, 2) NOT NULL,
+    Status ENUM('Processed', 'Unprocessed') DEFAULT 'Unprocessed',
     FOREIGN KEY (OrderID) REFERENCES Orders(OrderID) ON DELETE CASCADE,
     FOREIGN KEY (ProductID) REFERENCES Products(ProductID) ON DELETE CASCADE
 );
