@@ -726,7 +726,7 @@ main .btn-send:hover {
     box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.1);
     padding: 20px;
     text-align: center;
-    max-width: 400px;          /* Adjust to make the cards a bit smaller */
+    max-width: 300px;          /* Adjust to make the cards a bit smaller */
     flex: 1 1 400px;           /* Allow the cards to grow and shrink with a minimum width */
 }
 
