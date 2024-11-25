@@ -31,7 +31,6 @@ CREATE TABLE Orders (
     Date DATETIME DEFAULT CURRENT_TIMESTAMP,
     UserID INT NOT NULL,
     TotalAmount DECIMAL(10, 2) NOT NULL,
-    Status ENUM('Processed', 'Unprocessed') DEFAULT 'Unprocessed', 
     FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE
 );
 
@@ -42,6 +41,7 @@ CREATE TABLE OrderDetails (
     ProductID INT NOT NULL,
     Quantity INT NOT NULL,
     Price DECIMAL(10, 2) NOT NULL,
+    Status ENUM('Processed', 'Unprocessed') DEFAULT 'Unprocessed', 
     FOREIGN KEY (OrderID) REFERENCES Orders(OrderID) ON DELETE CASCADE,
     FOREIGN KEY (ProductID) REFERENCES Products(ProductID) ON DELETE CASCADE
 );
