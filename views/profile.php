@@ -26,7 +26,7 @@ include_once "../actions/getuserDetails.php"
 		</ul>
 		<div class="ads">
 			<div class="wrapper">
-				<a href="../login/logout.php" class="btn-upgrade">Logout</a>
+				<a href="../views/logout.php" class="btn-upgrade">Logout</a>
 			</div>
 		</div>
 	</section>
@@ -54,27 +54,28 @@ include_once "../actions/getuserDetails.php"
 				<li><a href="#" class="active">Dashboard</a></li>
 			</ul>
 
-			<div class="outer-profile">
-                <div id="profile-page">
-                    <div class="profile-info">
-                        <div class="profile-image-container">
-                            <?php echo getUserProfileImage() ?>
-                        </div>
-                        <div class="user-details">
-                            <?php
-                            echo getUserProfileDetails() ;
-                            ?>
-                            <!-- <p><strong>Name:</strong> John Doe</p>
-                            <p><strong>Email:</strong> johndoe@example.com</p>
-                            <p><strong>Date of Birth:</strong> January 1, 1990</p>
-                            <p><strong>Phone Number:</strong> 059977320</p> -->
-                        </div>
-                    </div>
+            <div class="outer-profile">
+                <div class="profile-image">
+                    <!-- <img src="../images/12.jpg" alt="Default Profile Picture" class="profile-pic"> -->
+                    <?php echo getUserProfileImage() ?>
+                </div>
+                <div class="user-details">
+                <?php
+                    echo getUserProfileDetails() ;
+                ?>
+                    <!-- <p><strong>Name:</strong> John Doe</p>
+                    <p><strong>Email:</strong> johndoe@example.com</p>
+                    <p><strong>Date of Birth:</strong> January 1, 1990</p>
+                    <p><strong>Phone Number:</strong> 059977320</p> -->
+
+                    
                     <div class="profile-actions">
-                        <button class="Edit" id="Edit">Edit Username</button>
-                        <button class="Editemail" id="Editemail">Change Email</button>
-                        <button class="ChangePassword" id="ChangePassword">Change Password</button>
-                        <button class="AddImage" id="AddImage">Add Image</button>
+                        <div class="actions">
+                            <button class="Edit" id="Edit">Edit Username</button>
+                            <button class="Editemail" id="Editemail">Change Email</button>
+                            <button class="ChangePassword" id="ChangePassword">Change Password</button>
+                            <button class="AddImage" id="AddImage">Add Image</button>
+                        </div>
                     </div>
                 </div>
             </div>

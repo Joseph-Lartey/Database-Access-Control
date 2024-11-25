@@ -1,3 +1,8 @@
+<?php
+include_once "../actions/getuserDetails.php"
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,17 +14,19 @@
 
 	<title>Profile</title>
 
+    <style>
+        
+    </style>
+
 </head>
 <body>
 
 	<section id="sidebar">
-		<a href="../admin/admin.php" class="brand"><i class='bx bxs-smile icon'></i> QuickShop</a>
-		<ul class="side-menu">
-            <li><a href="../admin/dashboard.php"><i class='bx bxs-dashboard icon' ></i> Dashboard</a></li>
-			<li><a href="../admin/shop.php"><i class='bx bxs-store icon' ></i> Shop</a></li>
-			<li><a href="../admin/profile.php" class="active"><i class='bx bxs-user icon' ></i> Profile</a></li>
-			<li><a href="../admin/role.php"><i class='bx bx-history icon' ></i>Roles</a></li>
-			<li><a href="../admin/orders.php"><i class='bx bx-store icon' ></i>Orders</a></li>
+        <a href="../sales/SalesOrders.php" class="brand"><i class='bx bxs-smile icon'></i> QuickShop</a>
+        <ul class="side-menu">
+            <li><a href="../sales/SalesOrders.php" ><i class='bx bxs-cart icon'></i> Orders</a></li>
+			<li><a href="../sales/Products.php"><i class='bx bxs-store icon'></i> Products</a></li>
+            <li><a href="../sales/profile.php" class="active"><i class='bx bxs-user icon'></i> Profile</a></li>
 		</ul>
 		<div class="ads">
 			<div class="wrapper">
@@ -38,7 +45,8 @@
 				</div>
 			</form>
 			<div class="nav-right">
-				<img src="../path-to-your-image/image.png" alt="Profile Picture" class="profile-pic">
+            <?php echo getUserProfileImage() ?>
+				 
 			</div>
 		</nav>
 	
@@ -47,20 +55,48 @@
 			<ul class="breadcrumbs">
 				<li><a href="#">Add news</a></li>
 				<li class="divider">/</li>
-				<li><a href="#" class="active">Dashboard</a></li>
+				<li><a href="#" class="active">Profile</a></li>
 			</ul>
 
-			<div class="outer-profile">
+
+
+            <div class="outer-profile">
+                <div class="profile-image">
+                    <!-- <img src="../images/12.jpg" alt="Default Profile Picture" class="profile-pic"> -->
+                    <?php echo getUserProfileImage() ?>
+                </div>
+                <div class="user-details">
+                <?php
+                    echo getUserProfileDetails() ;
+                ?>
+                    <!-- <p><strong>Name:</strong> John Doe</p>
+                    <p><strong>Email:</strong> johndoe@example.com</p>
+                    <p><strong>Date of Birth:</strong> January 1, 1990</p>
+                    <p><strong>Phone Number:</strong> 059977320</p> -->
+
+                    
+                    <div class="profile-actions">
+                        <div class="actions">
+                            <button class="Edit" id="Edit">Edit Username</button>
+                            <button class="Editemail" id="Editemail">Change Email</button>
+                            <button class="ChangePassword" id="ChangePassword">Change Password</button>
+                            <button class="AddImage" id="AddImage">Add Image</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+			<!-- <div class="outer-profile">
                 <div id="profile-page">
                     <div class="profile-info">
                         <div class="profile-image-container">
-                            <img src="../images/12.jpg" alt="Profile Picture" class="profile-image">
+                            <?php echo getUserProfileImage() ?>
                         </div>
-                        <div class="user-details">
-                            <p><strong>Name:</strong> John Doe</p>
-                            <p><strong>Email:</strong> johndoe@example.com</p>
-                            <p><strong>Date of Birth:</strong> January 1, 1990</p>
-                            <p><strong>Phone Number:</strong> 059977320</p>
+                        <div>
+                                <p><strong>Name:</strong> John Doe</p>
+                                <p><strong>Email:</strong> johndoe@example.com</p>
+                                <p><strong>Date of Birth:</strong> January 1, 1990</p>
+                                <p><strong>Phone Number:</strong> 059977320</p>
                         </div>
                     </div>
                     <div class="profile-actions">
@@ -70,13 +106,13 @@
                         <button class="AddImage" id="AddImage">Add Image</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Modals -->
             <div id="editUsernameModal" class="modal">
                 <div class="modal-content">
                     <span class="close">&times;</span>
-                    <form action="#">
+                    <form action="../actions/editUsername_action.php" method="POST">
                         <label for="Firstname">Firstname:</label>
                         <input type="text" id="Firstname" name="Firstname">
                         <label for="username">Lastname:</label>
@@ -89,7 +125,7 @@
             <div id="editEmailModal" class="modal">
                 <div class="modal-content">
                     <span class="close">&times;</span>
-                    <form action="#">
+                    <form action="../actions/editEmail_action.php" method="POST">
                         <label for="oldEmail">Old Email:</label>
                         <input type="email" id="oldEmail" name="old_email">
                         <label for="newEmail">New Email:</label>
@@ -102,7 +138,7 @@
             <div id="changePasswordModal" class="modal">
                 <div class="modal-content">
                     <span class="close">&times;</span>
-                    <form action="#">
+                    <form action="../actions/ChangePassword_action.php" method="POST">
                         <label for="currentPassword">Current Password:</label>
                         <input type="password" id="currentPassword" name="currentPassword" required>
                         <label for="newPassword">New Password:</label>
@@ -117,7 +153,7 @@
             <div id="addImageModal" class="modal">
                 <div class="modal-content">
                     <span class="close">&times;</span>
-                    <form action="#" method="POST" enctype="multipart/form-data">
+                    <form action="../actions/Add_image_action.php" method="POST" enctype="multipart/form-data">
                         <label for="image">Choose Image:</label>
                         <input type="file" id="image" name="image">
                         <button type="submit">Upload</button>
@@ -173,7 +209,9 @@
         });
     </script>
 
-	<script src="../public/js/admin.js"></script>
+	<script src="../public/javascript/admin.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </body>
 </html>
+
+

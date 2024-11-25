@@ -63,7 +63,7 @@ include_once "../actions/getuserDetails.php"
 		</ul>
 		<div class="ads">
 			<div class="wrapper">
-				<a href="../login/logout.php" class="btn-upgrade">Logout</a>
+				<a href="../views/logout.php" class="btn-upgrade">Logout</a>
 			</div>
 		</div>
 	</section>
