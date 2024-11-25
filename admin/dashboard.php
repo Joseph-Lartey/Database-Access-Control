@@ -16,12 +16,9 @@
 		<ul class="side-menu">
 			<li><a href="../admin/dashboard.php" class="active"><i class='bx bxs-dashboard icon' ></i> Dashboard</a></li>
 			<li><a href="../admin/shop.php"><i class='bx bxs-store icon' ></i> Shop</a></li>
-			<li><a href="../admin/cart.php"><i class='bx bxs-cart icon' ></i> Cart</a></li>
 			<li><a href="../admin/profile.php"><i class='bx bxs-user icon' ></i> Profile</a></li>
-			<li><a href="../admin/history.php"><i class='bx bx-history icon' ></i>History</a></li>
-			<li><a href="../admin/manage_role.php"><i class='bx bx-history icon' ></i>History</a></li>
-
-
+			<li><a href="../admin/role.php"><i class='bx bx-history icon' ></i>Roles</a></li>
+			<li><a href="../admin/orders.php"><i class='bx bx-store icon' ></i>Orders</a></li>
 		</ul>
 		<div class="ads">
 			<div class="wrapper">

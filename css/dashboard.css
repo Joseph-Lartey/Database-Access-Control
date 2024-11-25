@@ -40,9 +40,6 @@ li {
 
 
 
-
-
-
 /* SIDEBAR */
 #sidebar {
 	position: fixed;
@@ -339,7 +336,7 @@ nav .profile .profile-link a:hover {
 
 
 
-/* MAIN */
+/* DASHBOARD */
 main {
 	width: 100%;
 	padding: 24px 20px 20px 20px;
@@ -609,7 +606,7 @@ main .btn-send:hover {
 }
 
 
-/* Manage User Roles */
+/* ROLES */
 .user-cards-container {
     display: flex;
     flex-wrap: wrap; /* Allows wrapping to the next row if there's not enough space */
@@ -713,13 +710,13 @@ main .btn-send:hover {
 
 
 
-/* Container for product cards */
+/* SHOP */
 .product-cards-container {
     display: flex;             /* Use flexbox */
     flex-wrap: wrap;           /* Allow cards to wrap to the next line on small screens */
-    gap: 20px;                 /* Space between cards */
+    gap: 30px;                 /* Space between cards */
     justify-content: center;   /* Center the cards horizontally */
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 /* Individual product card */
@@ -729,8 +726,8 @@ main .btn-send:hover {
     box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.1);
     padding: 20px;
     text-align: center;
-    max-width: 300px;          /* Adjust to make the cards a bit smaller */
-    flex: 1 1 200px;           /* Allow the cards to grow and shrink with a minimum width */
+    max-width: 400px;          /* Adjust to make the cards a bit smaller */
+    flex: 1 1 400px;           /* Allow the cards to grow and shrink with a minimum width */
 }
 
 /* Image in the product card */
@@ -760,7 +757,7 @@ main .btn-send:hover {
 /* Price styling */
 .product-card .price {
     font-size: 16px;
-    color: var(--green);
+    color: var(--dark);
     font-weight: 700;
     margin: 10px 0;
 }
@@ -780,16 +777,15 @@ main .btn-send:hover {
 .product-card .add-btn,
 .product-card .delete-btn,
 .product-card .modify-btn {
-    background-color: var(--blue);
-    color: var(--light);
+    background-color: #923d41;
+    color: #ffffff;
     font-size: 14px;
-    padding: 5px 10px;
+    padding: 2px 6px;
     border-radius: 5px;
     cursor: pointer;
-    margin: 5px 0;
+    margin: 10px 0;
     border: none;
     transition: background 0.3s ease;
-    width: 100%;              /* Ensure buttons are the same width */
 }
 
 /* Hover effect for buttons */
@@ -806,7 +802,7 @@ main .btn-send:hover {
 .product-card .modify-btn {
     display: block;
     width: 100%;              /* Full width to match Add to Cart button size */
-    margin-top: 5px;
+	margin-top: 5px;
     text-align: center;
 }
 
@@ -815,7 +811,56 @@ main .btn-send:hover {
     margin-bottom: 10px;      /* Ensure spacing between Add to Cart and other buttons */
 }
 
+/* Buttons for Add to Cart, Delete Item, and Modify Item */
+.product-card button {
+    padding: 8px 16px;          /* Reduced padding for smaller buttons */
+    font-size: 14px;           /* Adjust font size for a compact look */
+    background-color: var(--blue);
+    color: var(--light);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 8px auto;          /* Space around the buttons */
+    display: block;            /* Center the button horizontally */
+    transition: background-color 0.3s ease;
+}
 
+/* Hover Effect for Buttons */
+.product-card button:hover {
+    background-color: var(--dark-blue);
+}
+
+/* Center Align Buttons */
+.product-card .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Space between buttons */
+    margin-top: 10px;
+}
+
+.create-product-container {
+    display: flex;
+    justify-content: flex-end; /* Aligns the button to the right */
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+#createItemButton {
+    background-color: var(--blue); /* Button background color */
+    color: var(--light); /* Button text color */
+    font-size: 14px; /* Font size */
+    padding: 10px 20px; /* Padding around the text */
+    border: none; /* Removes border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    font-weight: 600; /* Makes text bold */
+    transition: all 0.3s ease; /* Smooth hover effect */
+}
+
+#createItemButton:hover {
+    background-color: var(--dark-blue); /* Darker background on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds shadow on hover */
+}
 
 
 

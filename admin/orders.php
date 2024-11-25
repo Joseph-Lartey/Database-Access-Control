@@ -13,10 +13,10 @@
 		<a href="../admin/admin.php" class="brand"><i class='bx bxs-smile icon'></i> QuickShop</a>
 		<ul class="side-menu">
 			<li><a href="../admin/dashboard.php"><i class='bx bxs-dashboard icon' ></i> Dashboard</a></li>
-			<li><a href="../admin/shop.php" class="active"><i class='bx bxs-store icon' ></i> Shop</a></li>
+			<li><a href="../admin/shop.php"><i class='bx bxs-store icon' ></i> Shop</a></li>
 			<li><a href="../admin/profile.php"><i class='bx bxs-user icon' ></i> Profile</a></li>
 			<li><a href="../admin/role.php"><i class='bx bx-history icon' ></i>Roles</a></li>
-			<li><a href="../admin/orders.php"><i class='bx bx-store icon' ></i>Orders</a></li>
+			<li><a href="../admin/orders.php" class="active"><i class='bx bx-store icon' ></i>Orders</a></li>
 		</ul>
 		<div class="ads">
 			<div class="wrapper">
@@ -49,7 +49,7 @@
 			</ul>
 
             <div class="create-product-container">
-                <button class = "create-product-container" id="createItemButton">CREATE ITEM</button>
+                <button id="createItemButton">CREATE ITEM</button>
             </div>
 
 			<div class="shop-grid">
