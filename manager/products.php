@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id'])) {
     }
 
     // Reload the page to reflect updated data
-    header("Location: " . $_SERVER['PHP_SELF']);
+    header("Location: ../manager/products.php");
     exit;
 }
 ?>

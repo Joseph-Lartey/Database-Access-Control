@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Check if the user input OTP matches the expected OTP and the message is "Forgot Password"
     if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password' && $signingIn === 'signingIn' && $role === 'Administrator') {
         unset($_SESSION['OTP']);
-        header("Location: ../admin/dashboard.php?msg=" . urlencode($message_1));
+        header("Location: ../admin/shop.php?msg=" . urlencode($message_1));
         exit();
     }
 
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     } else if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password' && $signingIn === 'signingIn' && $role === 'Inventory Manager') {
         unset($_SESSION['OTP']);
-        header("Location: ../views/invent.php?msg=" . urlencode($message_1));
+        header("Location: ../manager/products.php?msg=" . urlencode($message_1));
         exit();
     } else if ($userOTP === $expectedOTP && $message_1 === 'Forgot Password' && $signingIn === 'signingIn' && $role === 'Customer') {
         unset($_SESSION['OTP']);
@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // If OTP matches for specific roles
     else if ($userOTP === $expectedOTP && $role === 'Administrator') {
         unset($_SESSION['OTP']);
-        header("Location: ../admin/dashboard.php?msg=OTP verified successfully.");
+        header("Location: ../admin/shop.php?msg=OTP verified successfully.");
         exit();
     } else if ($userOTP === $expectedOTP && $role === 'Sales Personnel') {
         unset($_SESSION['OTP']);
@@ -114,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     } else if ($userOTP === $expectedOTP && $role === 'Inventory Manager') {
         unset($_SESSION['OTP']);
-        header("Location: ../views/invent.php?msg=OTP verified successfully.");
+        header("Location: ../manager/products.php?msg=OTP verified successfully.");
         exit();
     } else if ($userOTP === $expectedOTP && $role === 'Customer') {
         unset($_SESSION['OTP']);

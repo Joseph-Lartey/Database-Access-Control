@@ -115,7 +115,7 @@ function sendOTP($email, $OTP)
         $mail->Port = 587;
 
         // Recipients
-        $mail->setFrom('kobekootinsanwu@gmail.com', 'Database Access Control Website');
+        $mail->setFrom('kobekootinsanwu@gmail.com', 'Database Access Control');
         $mail->addAddress($email);
 
         // Email content
