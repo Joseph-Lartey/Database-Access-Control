@@ -117,9 +117,8 @@ $orders = $query->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <section id="sidebar">
-        <a href="../admin/admin.php" class="brand"><i class='bx bxs-smile icon'></i> QuickShop</a>
+        <a href="../manager/products.php" class="brand"><i class='bx bxs-smile icon'></i> QuickShop</a>
         <ul class="side-menu">
-            <li><a href="../view/dashboard.php"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
             <li><a href="../manager/products.php"><i class='bx bx-box icon'></i> Products</a></li>
             <li><a href="../manager/orders.php" class="active"><i class='bx bx-receipt icon'></i> Orders</a></li>
         </ul>

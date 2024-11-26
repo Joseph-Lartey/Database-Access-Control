@@ -1,8 +1,6 @@
 <?php
 include '../settings/connection.php';
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-} 
+
 
 // Fetch products data
 $query = $pdo->prepare("SELECT * FROM Products");
@@ -24,7 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id'])) {
     
     if (isset($_POST['update_price'])) {
         $new_price = floatval($_POST['price']);
-        // Update price in the database
         $update_price_query = $pdo->prepare("UPDATE Products SET Price = :price WHERE ProductID = :product_id");
         $update_price_query->bindParam(':price', $new_price, PDO::PARAM_STR);
         $update_price_query->bindParam(':product_id', $product_id, PDO::PARAM_INT);
@@ -121,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id'])) {
         </ul>
         <div class="ads">
             <div class="wrapper">
-                <a href="../login/logout.php" class="btn-upgrade">Logout</a>
+                <a href="../views/logout.php" class="btn-upgrade">Logout</a>
             </div>
         </div>
     </section>
