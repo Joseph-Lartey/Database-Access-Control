@@ -14,5 +14,5 @@ document.querySelectorAll('.buy-btn').forEach((button) => {
 
 // Redirect to the product creation page
 document.getElementById('createItemButton').addEventListener('click', function () {
-    window.location.href = '../actiom/add_to_cart.php';
+    window.location.href = '../actions/add_to_cart.php';
 });
