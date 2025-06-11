@@ -43,14 +43,14 @@
             <form action="../actions/login.php" method="POST">
                 <h1>Sign in</h1>
                 <div class="infield">
-                    <input type="email" placeholder="Organization Email" name="email"/>
+                    <input type="email" placeholder="Email" name="email"/>
                     <label></label>
                 </div>
                 <div class="infield">
                     <input type="password" placeholder="Password" name="password" />
                     <label></label>
                 </div>
-                <a href="../view/forgot_password.php?msg=Forgot your password?" class="forgot">Forgot your password?</a>
+                <a href="../views/forgot_password.php?msg=Forgot your password?" class="forgot">Forgot your password?</a>
                 <button>Sign In</button>
             </form>
         </div>
@@ -58,16 +58,12 @@
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
                     <h1>Welcome!</h1>
-                    <br>
-                    <p>To keep connected with us please login with your info</p>
-                    <br><br>
+                    <p>Login with your personal info to stay connected</p>
                     <button>Sign In</button>
                 </div>
                 <div class="overlay-panel overlay-right">
                     <h1>Hello, Friend!</h1>
-                    <br>
-                    <p>Enter your organization's details to start your journey</p>
-                    <br><br>
+                    <p>Enter your personal details and start journey with us</p>
                     <button>Sign Up</button>
                 </div>
             </div>
